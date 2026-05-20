@@ -12,10 +12,10 @@ description: |
 ## Quick Setup (Recommended)
 
 ```bash
-npx -y firecrawl-cli@1.14.8 -y
+npx -y firecrawl-cli@1.16.2 init -y --browser
 ```
 
-This installs `firecrawl-cli` globally, authenticates via browser, and installs all skills.
+This installs `firecrawl-cli` globally, authenticates via browser, and installs core, build, and workflow skills.
 
 This setup is safe to re-run when the CLI is missing, stale, or only partially configured.
 
@@ -31,12 +31,13 @@ To install skills manually:
 
 ```bash
 firecrawl setup skills
+firecrawl setup workflows
 ```
 
 ## Manual Install
 
 ```bash
-npm install -g firecrawl-cli@1.14.8
+npm install -g firecrawl-cli@1.16.2
 ```
 
 ## Verify
@@ -78,5 +79,5 @@ Ask the user how they'd like to authenticate:
 If `firecrawl` is not found after installation:
 
 1. Ensure npm global bin is in PATH
-2. Try: `npx firecrawl-cli@1.14.8 --version`
-3. Reinstall: `npm install -g firecrawl-cli@1.14.8`
+2. Try: `npx firecrawl-cli@1.16.2 --version`
+3. Reinstall: `npm install -g firecrawl-cli@1.16.2`

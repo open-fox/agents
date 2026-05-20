@@ -68,5 +68,6 @@ High-density modular layout with 6-7 typed information modules packed with concr
 - `pop-laboratory`: Technical precision with coordinate markers and blueprint grid
 - `morandi-journal`: Hand-drawn warmth with doodle illustrations and organic frames
 - `retro-pop-grid`: 1970s pop art with strict grid cells and bold contrast
+- `retro-popup-pop`: Vintage desktop popups with chunky pixel UI for retro-tech dense guides
 - `corporate-memphis`: Clean business feel for product comparisons
 - `technical-schematic`: Engineering precision for technical product guides

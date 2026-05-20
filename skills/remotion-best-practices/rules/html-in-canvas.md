@@ -5,6 +5,32 @@ Renders children into a `<canvas>` so you can post-process them with the Canvas 
 Only works in Chrome 149+ with the `chrome://flags/#canvas-draw-element` flag enabled.  
 Give the user a notice.
 
+## Nesting
+
+Do not nest `<HtmlInCanvas>` inside another `<HtmlInCanvas>`. Remotion throws:
+
+```
+<HtmlInCanvas> effects cannot be nested together. Chrome will only display the outer effect. Consider merging the effects into one if you can.
+```
+
+## Enabling WebGL during renders
+
+If you make use of WebGL during renders, you need to enable it:
+
+From the CLI:
+
+```bash
+npx remotion render --gl=angle
+```
+
+Set it as the default for Studio and CLI (advised):
+
+```ts
+import { Config } from "@remotion/cli/config";
+
+Config.setChromiumOpenGlRenderer("angle");
+```
+
 ## Basic usage
 
 By default, draws to canvas with no effect applied:
@@ -71,7 +97,11 @@ For WebGL, set up the context, program, and texture in `onInit` and return a cle
 ```tsx
 const onInit: HtmlInCanvasOnInit = useCallback(({ canvas }) => {
   const gl = canvas.getContext("webgl2", { alpha: true, premultipliedAlpha: true });
-  if (!gl) throw new Error("WebGL2 unavailable");
+  if (!gl) {
+    throw new Error(
+      "WebGL2 unavailable. Try rendering with the --gl=angle option. See https://remotion.dev/docs/gl-options.",
+    );
+  }
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
   // compile program, create texture, set up VAO...
   return () => {

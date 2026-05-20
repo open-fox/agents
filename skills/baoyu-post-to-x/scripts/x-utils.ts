@@ -218,6 +218,7 @@ async function launchChromeOnce(
 
   try {
     await waitForChromeDebugPort(port, 30_000, { includeLastError: true });
+    chrome.unref();
     return { chrome, port };
   } catch (error) {
     killChrome(chrome);

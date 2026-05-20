@@ -164,7 +164,7 @@ export async function publishArticle(options: ArticleOptions): Promise<void> {
 
     // Check if we're on the articles list page (has Write button)
     console.log('[x-article] Looking for Write button...');
-    const writeButtonFound = await waitForElement('[data-testid="empty_state_button_text"]', 10_000);
+    const writeButtonFound = await waitForElement('[data-testid="empty_state_button_text"]', 30_000);
 
     if (writeButtonFound) {
       console.log('[x-article] Clicking Write button...');
@@ -172,6 +172,40 @@ export async function publishArticle(options: ArticleOptions): Promise<void> {
         expression: `document.querySelector('[data-testid="empty_state_button_text"]')?.click()`,
       }, { sessionId });
       await sleep(2000);
+    } else {
+      console.log('[x-article] Write button not found, looking for create button...');
+      const createClicked = await cdp.send<{ result: { value: boolean } }>('Runtime.evaluate', {
+        expression: `(() => {
+          const selectors = [
+            'button[aria-label="create"]',
+            'button[aria-label="Create"]',
+            'button[aria-label*="create" i]',
+            'button[aria-label*="write" i]',
+            'a[href="/compose/articles"]'
+          ];
+          for (const sel of selectors) {
+            const el = document.querySelector(sel);
+            if (el instanceof HTMLElement) {
+              el.click();
+              return true;
+            }
+          }
+          const buttons = [...document.querySelectorAll('button')];
+          const byText = buttons.find((el) => /^(create|write)$/i.test((el.textContent || '').trim()));
+          if (byText instanceof HTMLElement) {
+            byText.click();
+            return true;
+          }
+          return false;
+        })()`,
+        returnByValue: true,
+      }, { sessionId });
+      if (createClicked.result.value) {
+        console.log('[x-article] Create button clicked');
+        await sleep(2000);
+      } else {
+        console.log('[x-article] Create button not found');
+      }
     }
 
     // Wait for editor (title textarea)

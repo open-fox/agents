@@ -33,18 +33,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skills/agent-browser/SKILL.md",
-      "skillFolderHash": "121eecacd86c0aab06aef5cd4663e80c5397cd41",
+      "skillFolderHash": "c1470a475a0472fceda2401ea6763708a91680a8",
       "installedAt": "2026-04-02T14:08:22.876Z",
-      "updatedAt": "2026-04-29T02:57:42.415Z"
+      "updatedAt": "2026-05-20T08:52:41.151Z"
     },
     "baoyu-article-illustrator": {
       "source": "jimliu/baoyu-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/jimliu/baoyu-skills.git",
       "skillPath": "skills/baoyu-article-illustrator/SKILL.md",
-      "skillFolderHash": "357d3623ac0b97520a93d2cad0b7f24e28b387c9",
+      "skillFolderHash": "9a48cd22436099b82a83baae821b43ba7c01eb41",
       "installedAt": "2026-04-02T14:10:08.098Z",
-      "updatedAt": "2026-04-29T02:57:47.545Z"
+      "updatedAt": "2026-05-20T08:52:46.225Z"
     },
     "baoyu-compress-image": {
       "source": "jimliu/baoyu-skills",
@@ -60,18 +60,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/jimliu/baoyu-skills.git",
       "skillPath": "skills/baoyu-cover-image/SKILL.md",
-      "skillFolderHash": "92b651506c12857d923f0303dad33a41bc234695",
+      "skillFolderHash": "6143cc4b43c10ebc90bd3af636e8157f6f2700fb",
       "installedAt": "2026-04-02T14:10:10.840Z",
-      "updatedAt": "2026-04-29T02:58:03.306Z"
+      "updatedAt": "2026-05-20T08:52:50.423Z"
     },
     "baoyu-infographic": {
       "source": "jimliu/baoyu-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/jimliu/baoyu-skills.git",
       "skillPath": "skills/baoyu-infographic/SKILL.md",
-      "skillFolderHash": "bafc39c6224105767465ec62ab2cdf95a2e15c2e",
+      "skillFolderHash": "eb58f21dbbaeb4dd5ff11f3e6f62d5cc941b91cc",
       "installedAt": "2026-04-02T14:10:16.273Z",
-      "updatedAt": "2026-04-29T02:58:18.476Z"
+      "updatedAt": "2026-05-20T08:52:55.011Z"
     },
     "baoyu-markdown-to-html": {
       "source": "jimliu/baoyu-skills",
@@ -87,27 +87,27 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/jimliu/baoyu-skills.git",
       "skillPath": "skills/baoyu-post-to-x/SKILL.md",
-      "skillFolderHash": "ce216810558cc9318d9addd1b76b6afde1847025",
+      "skillFolderHash": "8df511db75ffdce56df2f5b2911d203c6a203894",
       "installedAt": "2026-04-02T14:10:20.624Z",
-      "updatedAt": "2026-04-29T02:58:39.069Z"
+      "updatedAt": "2026-05-20T08:52:59.342Z"
     },
     "baoyu-slide-deck": {
       "source": "jimliu/baoyu-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/jimliu/baoyu-skills.git",
       "skillPath": "skills/baoyu-slide-deck/SKILL.md",
-      "skillFolderHash": "d63f54d6df721e77c84a16107ab5ef76e7bcce79",
+      "skillFolderHash": "6b15d23b2da2ba28b8d2c12a0b832406cdf9623f",
       "installedAt": "2026-04-02T14:10:21.674Z",
-      "updatedAt": "2026-04-29T02:58:43.579Z"
+      "updatedAt": "2026-05-20T08:53:05.159Z"
     },
     "baoyu-xhs-images": {
       "source": "jimliu/baoyu-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/jimliu/baoyu-skills.git",
       "skillPath": "skills/baoyu-xhs-images/SKILL.md",
-      "skillFolderHash": "f32dca954fb9906953f38b8eed448e383dcd77af",
+      "skillFolderHash": "c160ca106322d720b7636379c03f6d31b2d9ada0",
       "installedAt": "2026-04-02T14:10:24.708Z",
-      "updatedAt": "2026-04-29T02:58:59.349Z"
+      "updatedAt": "2026-05-20T08:53:11.900Z"
     },
     "baoyu-youtube-transcript": {
       "source": "jimliu/baoyu-skills",
@@ -123,27 +123,27 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/remotion-dev/skills.git",
       "skillPath": "skills/remotion/SKILL.md",
-      "skillFolderHash": "a5e367ae50ace5d743ec398ef2cfbbd987b182d7",
+      "skillFolderHash": "77a2a3ec2e2eb957b5e82913fbc1f2cebce5d193",
       "installedAt": "2026-04-02T14:15:57.006Z",
-      "updatedAt": "2026-05-03T11:20:53.633Z"
+      "updatedAt": "2026-05-20T08:53:13.848Z"
     },
     "seo-audit": {
       "source": "coreyhaines31/marketingskills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/coreyhaines31/marketingskills.git",
       "skillPath": "skills/seo-audit/SKILL.md",
-      "skillFolderHash": "d333a589b3cd513296c419ee6911903be8c9865b",
+      "skillFolderHash": "0f1f5e31ce921513828ac8f440f358df6fa0751a",
       "installedAt": "2026-04-02T14:21:56.370Z",
-      "updatedAt": "2026-04-29T02:59:13.807Z"
+      "updatedAt": "2026-05-20T08:53:16.656Z"
     },
     "firecrawl": {
       "source": "firecrawl/cli",
       "sourceType": "github",
       "sourceUrl": "https://github.com/firecrawl/cli.git",
       "skillPath": "skills/firecrawl-cli/SKILL.md",
-      "skillFolderHash": "a78ee982e504bf2c3a91ed8fa46a22e339d59937",
+      "skillFolderHash": "4d1d47eabb7d3b82bcd5e19108f81a130688a02c",
       "installedAt": "2026-04-02T14:25:18.505Z",
-      "updatedAt": "2026-04-29T02:59:18.237Z"
+      "updatedAt": "2026-05-20T08:53:18.922Z"
     },
     "slidev": {
       "source": "antfu/skills",
@@ -195,9 +195,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/steipete/clawdis.git",
       "skillPath": "skills/gog/SKILL.md",
-      "skillFolderHash": "2c9b7bc934b67d90a276472304b3af7b14122fd6",
+      "skillFolderHash": "865fadff4c3fcc3db2bb68e64f323c7a5562c5da",
       "installedAt": "2026-04-03T14:48:30.176Z",
-      "updatedAt": "2026-04-03T14:48:30.176Z"
+      "updatedAt": "2026-05-20T08:53:35.082Z"
     },
     "caveman": {
       "source": "mattpocock/skills",

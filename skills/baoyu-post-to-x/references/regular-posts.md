@@ -6,6 +6,17 @@ Detailed documentation for posting text and images to X.
 
 If you prefer step-by-step control:
 
+### Step 0: Prefer Chrome Computer Use in Codex
+
+When running inside Codex, first detect whether Chrome Computer Use is enabled:
+
+1. If Computer Use tools are already visible, call `get_app_state` for `Google Chrome`.
+2. If not, use `tool_search` for `computer-use get_app_state click press_key drag scroll Google Chrome`, then call `get_app_state`.
+3. If `get_app_state` succeeds, use the user's real Chrome with Computer Use for all X UI actions.
+4. Use CDP scripts only when Computer Use is unavailable or explicitly requested.
+
+If the user explicitly asks for Chrome Computer Use, do not use Playwright, the in-app Browser, or CDP without approval.
+
 ### Step 1: Copy Image to Clipboard
 
 ```bash
@@ -25,27 +36,15 @@ ${BUN_X} {baseDir}/scripts/paste-from-clipboard.ts --app "Google Chrome" --retri
 ${BUN_X} {baseDir}/scripts/paste-from-clipboard.ts --delay 200
 ```
 
-### Step 3: Use Playwright MCP (if Chrome session available)
+### Step 3: Use Chrome Computer Use (Preferred)
 
-```bash
-# Navigate
-mcp__playwright__browser_navigate url="https://x.com/compose/post"
-
-# Get element refs
-mcp__playwright__browser_snapshot
-
-# Type text
-mcp__playwright__browser_click element="editor" ref="<ref>"
-mcp__playwright__browser_type element="editor" ref="<ref>" text="Your content"
-
-# Paste image (after copying to clipboard)
-mcp__playwright__browser_press_key key="Meta+v"  # macOS
-# or
-mcp__playwright__browser_press_key key="Control+v"  # Windows/Linux
-
-# Screenshot to verify
-mcp__playwright__browser_take_screenshot filename="preview.png"
-```
+1. Use `get_app_state` for `Google Chrome`.
+2. Navigate Chrome to `https://x.com/compose/post` if needed.
+3. Click the composer and type the post text.
+4. Copy each image to the clipboard with `copy-to-clipboard.ts image <path>`.
+5. Press `super+v` on macOS or `control+v` on Windows/Linux with Computer Use.
+6. Wait until X finishes media upload.
+7. Ask for explicit confirmation before clicking `Post`.
 
 ## Image Support
 
@@ -59,12 +58,12 @@ mcp__playwright__browser_take_screenshot filename="preview.png"
 User: /post-to-x "Hello from Claude!" --image ./screenshot.png
 
 Claude:
-1. Runs: ${BUN_X} {baseDir}/scripts/x-browser.ts "Hello from Claude!" --image ./screenshot.png
-2. Chrome opens with X compose page
-3. Text is typed into editor
-4. Image is copied to clipboard and pasted
-5. Browser stays open 30s for preview
-6. Reports: "Post composed. Use --submit to post."
+1. Detects Chrome Computer Use
+2. Opens X compose in the user's real Chrome
+3. Types text into editor
+4. Copies image to clipboard and pastes with Computer Use
+5. Waits for upload and verifies the preview
+6. Asks before clicking Post
 ```
 
 ## Troubleshooting
@@ -80,7 +79,13 @@ Claude:
 
 ## How It Works
 
-The `x-browser.ts` script uses Chrome DevTools Protocol (CDP) to:
+In Chrome Computer Use mode:
+1. Codex controls the user's visible Google Chrome window
+2. Text is typed through the real UI
+3. Images are copied to the system clipboard and pasted with real keystrokes
+4. The user confirms before the final public post
+
+The `x-browser.ts` script is the CDP fallback. It uses Chrome DevTools Protocol (CDP) to:
 1. Launch real Chrome (not Playwright) with `--disable-blink-features=AutomationControlled`
 2. Use persistent profile directory for saved login sessions
 3. Interact with X via CDP commands (Runtime.evaluate, Input.dispatchKeyEvent)

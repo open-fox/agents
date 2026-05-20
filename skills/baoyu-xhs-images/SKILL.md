@@ -1,7 +1,7 @@
 ---
 name: baoyu-xhs-images
 description: "[Deprecated: use baoyu-image-cards] Generates Xiaohongshu (Little Red Book) image card series with 12 visual styles, 8 layouts, and 3 color palettes. Breaks content into 1-10 cartoon-style image cards optimized for XHS engagement. Use when user mentions \"小红书图片\", \"XHS images\", \"RedNote infographics\", \"小红书种草\", \"小绿书\", \"微信图文\", \"微信贴图\", or wants social media infographic series for Chinese platforms."
-version: 1.56.2
+version: 1.57.0
 metadata:
   openclaw:
     homepage: https://github.com/JimLiu/baoyu-skills#baoyu-xhs-images
@@ -29,16 +29,38 @@ When this skill needs to render an image, resolve the backend in this order:
 1. **Current-request override** — if the user names a specific backend in the current message, use it.
 2. **Saved preference** — if `EXTEND.md` sets `preferred_image_backend` to a backend available right now, use it.
 3. **Auto-select** (when the preference is `auto`, unset, or the pinned backend isn't available):
-   - If the current runtime exposes a native image tool (e.g., Codex `imagegen`, Hermes `image_generate`), use it. Runtime-native tools are preferred by default — agents that know their own tool inventory should surface the native one here.
+   - **Codex (`imagegen`)** — first, inspect your available-skills / tool inventory. If a skill named `imagegen` is listed, you are running inside Codex and MUST use it: invoke via the `Skill` tool with `skill: "imagegen"`, passing the saved prompt file's content (plus output path and aspect ratio per Codex `imagegen`'s own args). Codex `imagegen` is the official raster backend in that runtime and outranks any non-native skill (e.g., `baoyu-imagine`) unless the user has explicitly pinned a different `preferred_image_backend`.
+   - **Other runtime-native tools** — if the runtime exposes a different native image tool (e.g., Hermes `image_generate`), use it the same way.
    - Otherwise, if exactly one non-native backend is installed (e.g., `baoyu-imagine`), use it.
    - Otherwise (multiple non-native backends with no runtime-native tool), ask the user once — batch with any other initial questions.
 4. **If none are available**, tell the user and ask how to proceed.
+
+**⛔ Never substitute SVG, HTML, canvas, or other code-based rendering for raster image generation.** Codex `imagegen`'s own description says it should be used "when the output should be a bitmap asset rather than repo-native code or vector." If you cannot resolve a raster backend via step 3, fall through to step 4 and ask the user — do **not** silently emit SVG, write inline `<svg>` markup, or produce HTML/CSS art as a substitute. This applies even if the article/section seems "diagram-like": the consumer skill calling this rule has already decided that a raster image is what it needs.
+
+**⛔ Never repair rendered text by painting over a generated bitmap.** Do not use ImageMagick, Pillow, Canvas, SVG, HTML/CSS, OCR scripts, or any other programmatic overlay to cover, rewrite, erase, stroke, or replace titles, body copy, tags, or any other text inside an already generated image card. If text is wrong or unclear, regenerate from a corrected prompt, switch to a layout with less on-card text, or ask the user which imperfect candidate to keep.
 
 Setting `preferred_image_backend: ask` forces the step-3 prompt every run regardless of available backends. Users change the pinned backend via the `## Changing Preferences` section below.
 
 **Prompt file requirement (hard)**: write each image's full, final prompt to a standalone file under `prompts/` (naming: `NN-{type}-[slug].md`) BEFORE invoking any backend. The file is the reproducibility record and lets you switch backends without regenerating prompts.
 
 Concrete tool names (`imagegen`, `image_generate`, `baoyu-imagine`) above are examples — substitute the local equivalents under the same rule.
+
+## Batch Generation Policy
+
+After every prompt file for the current generation group has been saved and verified, generate images in batches by default.
+
+Priority order:
+
+1. Use the chosen backend's native batch / multi-task interface if it exists. Each task must keep its own prompt file, output path, aspect ratio, session ID, and direct reference images.
+2. If no native batch interface exists but the runtime can issue parallel tool calls, dispatch up to `generation_batch_size` images at a time. Default: `4`. An explicit user request in the current message, such as `--batch-size 4` or "并行4张一起生成", overrides EXTEND.md.
+3. If neither native batch nor parallel tool calls are available, generate sequentially.
+
+Rules:
+
+- Honor the image-1 anchor chain: generate image 1 first, then batch images 2+ using image 1 as the reference.
+- Never start a batch until every selected prompt file for that batch exists on disk.
+- Retry failed items once without regenerating successful items.
+- Do not use subagents merely to parallelize image rendering. Use subagents only for separate prompt iteration or creative exploration.
 
 ## Confirmation Policy
 
@@ -62,6 +84,7 @@ Respond in the user's language across questions, progress, errors, and completio
 | `--palette <name>` | Color override: macaron / warm / neon |
 | `--preset <name>` | Style + layout + optional palette shorthand (see Presets below; per-preset prompt fragments in `references/style-presets.md`) |
 | `--ref <files...>` | Reference images applied to image 1 as the series anchor |
+| `--batch-size <n>` | Temporary generation batch size for this run. Default: `generation_batch_size` from EXTEND.md, otherwise 4. Clamp to 1-8. |
 | `--yes` | Non-interactive: skip all confirmations, use EXTEND.md or built-in defaults, auto-confirm recommended plan (Path A) |
 
 ## Dimensions
@@ -297,7 +320,7 @@ Check these paths in order; first hit wins:
 - **Not found + interactive** → run first-time setup (see `references/config/first-time-setup.md`) and save before anything else. Do NOT analyze content or ask style questions until preferences exist — this keeps first-run behavior predictable.
 - **Not found + `--yes`** → skip setup, use built-in defaults (no watermark, style/layout auto-selected, language from content). Do not prompt, do not create EXTEND.md.
 
-**EXTEND.md keys**: watermark, preferred style/layout, custom style definitions, language preference. Schema: `references/config/preferences-schema.md`.
+**EXTEND.md keys**: watermark, preferred style/layout, custom style definitions, language preference, preferred image backend, generation batch size. Schema: `references/config/preferences-schema.md`.
 
 ### Step 1: Analyze Content → `analysis.md`
 
@@ -346,14 +369,13 @@ With confirmed outline + style + layout + palette:
 
 **Visual consistency — image-1 anchor chain**: character / mascot / color rendering drifts between calls unless you anchor them. Generate image 1 (cover) first WITHOUT `--ref`, then pass image 1 as `--ref` to every subsequent image. This is the single most important consistency trick for this skill — don't skip it even if the backend also supports a session ID.
 
-For each image (cover, content, ending):
+Generation flow:
 
-1. Write the full prompt to `prompts/NN-{type}-{slug}.md` in the user's preferred language (backup rule applies).
-2. Generate:
-   - **Image 1**: no `--ref` (establishes the anchor).
-   - **Images 2+**: add `--ref <path-to-image-01.png>`.
-   - Backup rule applies to the PNG files.
-3. Report progress after each image.
+1. Write the full prompt for every image to `prompts/NN-{type}-{slug}.md` in the user's preferred language (backup rule applies), then verify all selected prompt files exist.
+2. Generate **image 1** first without `--ref`; backup rule applies to the PNG file. This establishes the anchor.
+3. Build a task list for **images 2+** using image 1 as `--ref <path-to-image-01.png>`.
+4. Dispatch images 2+ in batches per the `## Batch Generation Policy`: backend native batch first, runtime parallel tool calls second, sequential only as fallback.
+5. Report progress after each completed image. On failure, retry only the failed item once from the same saved prompt file.
 
 **Watermark** (if enabled in EXTEND.md): append to the generation prompt:
 
@@ -412,6 +434,12 @@ For the style × layout compatibility matrix, see the **Style × Layout Matrix**
 
 Always update the prompt file before regenerating — it's the source of truth and makes changes reproducible.
 
+Text correction policy:
+
+- If a card's title, body copy, tags, or any other rendered text is misspelled, garbled, hard to read, or visually weak, do not patch the bitmap with code.
+- For text-correction regenerations, write a new prompt file and a new output path so the flawed candidate is preserved for comparison.
+- Post-processing is limited to crop, resize, compression, or format conversion that does not alter text or the main composition.
+
 ## References
 
 | File | Content |
@@ -448,5 +476,6 @@ EXTEND.md lives at the first matching path listed in Step 0. Three ways to chang
   - `preferred_image_backend: codex-imagegen` — pin to Codex's built-in.
   - `preferred_image_backend: baoyu-imagine` — pin to the baoyu-imagine skill.
   - `preferred_image_backend: ask` — confirm backend every run.
+  - `generation_batch_size: 4` — default number of images to render concurrently when the backend/runtime supports batch or parallel generation.
   - `preferred_style: notion`, `preferred_layout: dense`, `preferred_palette: macaron`, `language: zh`.
   - `watermark.enabled: true` + `watermark.content: "@handle"` — add a watermark.
