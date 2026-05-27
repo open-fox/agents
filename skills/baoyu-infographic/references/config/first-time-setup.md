@@ -146,7 +146,7 @@ custom_styles: []
 ---
 ```
 
-`preferred_image_backend: auto` is the baked-in default — first-time setup never asks about it. The `## Image Generation Tools` rule in SKILL.md then picks the runtime-native tool (Codex `imagegen`, Hermes `image_generate`, etc.) when one is available, and falls back to installed backends like `baoyu-imagine`.
+`preferred_image_backend: auto` is the baked-in default — first-time setup never asks about it. The `## Image Generation Tools` rule in SKILL.md then picks the runtime-native tool (Codex `imagegen`, Hermes `image_generate`, etc.) when one is available, and falls back to installed backends like `baoyu-image-gen`.
 
 ## Modifying Preferences Later
 

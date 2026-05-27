@@ -381,7 +381,7 @@ Follow the `## Image Generation Tools` rule at the top of `SKILL.md`. Concretely
 
 | Skill Supports `--ref` | Action |
 |------------------------|--------|
-| Yes (e.g., baoyu-imagine with Google) | Pass reference images via `--ref` |
+| Yes (e.g., baoyu-image-gen with Google) | Pass reference images via `--ref` |
 | No | Convert to text description, append to prompt |
 
 **Verification**: Before generating, confirm reference processing:

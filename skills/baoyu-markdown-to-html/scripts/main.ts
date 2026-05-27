@@ -13,6 +13,7 @@ import {
   formatTimestamp,
   parseArgs,
   parseFrontmatter,
+  preprocessMermaidInMarkdown,
   renderMarkdownDocument,
   replaceMarkdownImagesWithPlaceholders,
   resolveContentImages,
@@ -20,11 +21,18 @@ import {
   stripWrappingQuotes,
 } from "baoyu-md";
 import type { CliOptions } from "baoyu-md";
+import { closeRenderer, renderMermaidToPng } from "baoyu-chrome-cdp/mermaid";
 
 interface ImageInfo {
   placeholder: string;
   localPath: string;
   originalPath: string;
+}
+
+interface MermaidImageInfo {
+  hash: string;
+  localPath: string;
+  cached: boolean;
 }
 
 interface ParsedResult {
@@ -34,10 +42,20 @@ interface ParsedResult {
   htmlPath: string;
   backupPath?: string;
   contentImages: ImageInfo[];
+  mermaidImages: MermaidImageInfo[];
+}
+
+interface MermaidCliOptions {
+  enabled?: boolean;
+  theme?: string;
+  scale?: number;
+  background?: string;
+  minWidth?: number;
 }
 
 type ConvertMarkdownOptions = Partial<Omit<CliOptions, "inputPath">> & {
   title?: string;
+  mermaid?: MermaidCliOptions;
 };
 
 export async function convertMarkdown(
@@ -70,8 +88,34 @@ export async function convertMarkdown(
     ? { ...frontmatter, title }
     : frontmatter;
 
+  const mermaidEnabled = options?.mermaid?.enabled !== false;
+  const mermaidMinWidth = options?.mermaid?.minWidth ?? 860;
+  const { markdown: mermaidProcessedBody, images: mermaidImages } =
+    await preprocessMermaidInMarkdown(body, {
+      baseDir,
+      renderFn: renderMermaidToPng,
+      enabled: mermaidEnabled,
+      theme: options?.mermaid?.theme,
+      scale: options?.mermaid?.scale,
+      background: options?.mermaid?.background,
+      minWidth: mermaidMinWidth,
+      onError: (error, block) => {
+        const message = error instanceof Error ? error.message : String(error);
+        console.error(
+          `[markdown-to-html] mermaid render failed (${block.code.slice(0, 40).replace(/\s+/g, " ")}…): ${message}`,
+        );
+      },
+    });
+
+  if (mermaidImages.length > 0) {
+    const fresh = mermaidImages.filter((image) => !image.cached).length;
+    console.error(
+      `[markdown-to-html] mermaid: ${mermaidImages.length} block(s), ${fresh} rendered, ${mermaidImages.length - fresh} cached`,
+    );
+  }
+
   const { images, markdown: rewrittenBody } = replaceMarkdownImagesWithPlaceholders(
-    body,
+    mermaidProcessedBody,
     "MDTOHTMLIMGPH_",
   );
   const rewrittenMarkdown = `${serializeFrontmatter(effectiveFrontmatter)}${rewrittenBody}`;
@@ -130,6 +174,11 @@ export async function convertMarkdown(
     htmlPath: finalHtmlPath,
     backupPath,
     contentImages,
+    mermaidImages: mermaidImages.map((image) => ({
+      hash: image.hash,
+      localPath: image.localPath,
+      cached: image.cached,
+    })),
   };
 }
 
@@ -156,6 +205,11 @@ Options:
   --count                 Show reading time / word count
   --legend <value>        Image caption: title-alt, alt-title, title, alt, none
   --keep-title            Keep the first heading in content. Default: false (removed)
+  --mermaid-theme <name>  Mermaid theme: default, forest, dark, neutral. Default: default
+  --mermaid-scale <N>     Mermaid render scale: 1, 1.5, 2, 3. Default: 2
+  --mermaid-width <N>     Mermaid target display width in CSS px. Default: 860
+  --mermaid-bg <value>    Mermaid background: white, transparent, or #hex. Default: white
+  --no-mermaid            Skip Mermaid rendering; emit <pre class="mermaid"> fallback
   --help                  Show this help
 
 Output:
@@ -215,13 +269,78 @@ function extractTitleArg(argv: string[]): { renderArgs: string[]; title?: string
   return { renderArgs, title };
 }
 
+const VALID_MERMAID_THEMES = new Set(["default", "forest", "dark", "neutral", "base"]);
+
+function extractMermaidArgs(argv: string[]): { renderArgs: string[]; mermaid: MermaidCliOptions } {
+  const mermaid: MermaidCliOptions = {};
+  const renderArgs: string[] = [];
+
+  for (let i = 0; i < argv.length; i += 1) {
+    const arg = argv[i]!;
+    if (arg === "--no-mermaid") {
+      mermaid.enabled = false;
+      continue;
+    }
+    if (arg === "--mermaid-theme" || arg.startsWith("--mermaid-theme=")) {
+      const value = parseArgValue(argv, i, "--mermaid-theme");
+      if (!value) {
+        console.error("Missing value for --mermaid-theme");
+        printUsage(1);
+      }
+      if (!VALID_MERMAID_THEMES.has(value)) {
+        console.error(`Invalid --mermaid-theme: ${value} (choose one of ${[...VALID_MERMAID_THEMES].join(", ")})`);
+        printUsage(1);
+      }
+      mermaid.theme = value;
+      if (!arg.includes("=")) i += 1;
+      continue;
+    }
+    if (arg === "--mermaid-scale" || arg.startsWith("--mermaid-scale=")) {
+      const value = parseArgValue(argv, i, "--mermaid-scale");
+      const parsed = Number.parseFloat(value ?? "");
+      if (!value || !Number.isFinite(parsed) || parsed <= 0 || parsed > 4) {
+        console.error(`Invalid --mermaid-scale: ${value} (expect a positive number ≤ 4)`);
+        printUsage(1);
+      }
+      mermaid.scale = parsed;
+      if (!arg.includes("=")) i += 1;
+      continue;
+    }
+    if (arg === "--mermaid-width" || arg.startsWith("--mermaid-width=")) {
+      const value = parseArgValue(argv, i, "--mermaid-width");
+      const parsed = Number.parseInt(value ?? "", 10);
+      if (!value || !Number.isFinite(parsed) || parsed <= 0) {
+        console.error(`Invalid --mermaid-width: ${value} (expect a positive integer)`);
+        printUsage(1);
+      }
+      mermaid.minWidth = parsed;
+      if (!arg.includes("=")) i += 1;
+      continue;
+    }
+    if (arg === "--mermaid-bg" || arg.startsWith("--mermaid-bg=")) {
+      const value = parseArgValue(argv, i, "--mermaid-bg");
+      if (!value) {
+        console.error("Missing value for --mermaid-bg");
+        printUsage(1);
+      }
+      mermaid.background = value;
+      if (!arg.includes("=")) i += 1;
+      continue;
+    }
+    renderArgs.push(arg);
+  }
+
+  return { renderArgs, mermaid };
+}
+
 async function main(): Promise<void> {
   const args = process.argv.slice(2);
   if (args.length === 0 || args.includes("--help") || args.includes("-h")) {
     printUsage(0);
   }
 
-  const { renderArgs, title } = extractTitleArg(args);
+  const { renderArgs: afterTitle, title } = extractTitleArg(args);
+  const { renderArgs, mermaid } = extractMermaidArgs(afterTitle);
   const options = parseArgs(renderArgs);
   if (!options) {
     printUsage(1);
@@ -238,11 +357,15 @@ async function main(): Promise<void> {
     process.exit(1);
   }
 
-  const result = await convertMarkdown(markdownPath, { ...options, title });
+  const result = await convertMarkdown(markdownPath, { ...options, title, mermaid });
   console.log(JSON.stringify(result, null, 2));
 }
 
-await main().catch((error) => {
+try {
+  await main();
+} catch (error) {
   console.error(`Error: ${error instanceof Error ? error.message : String(error)}`);
-  process.exit(1);
-});
+  process.exitCode = 1;
+} finally {
+  await closeRenderer();
+}

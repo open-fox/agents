@@ -35,7 +35,7 @@ custom_styles:            # extra style definitions merged with the 21 built-ins
 | `preferred_style` | string\|null | null | Pre-selected style — surfaces as the top recommendation in Step 3 |
 | `preferred_aspect` | string\|null | null | Default aspect for Step 4 (named preset or W:H string) |
 | `language` | string\|null | null | Output language (null = auto-detect from source content) |
-| `preferred_image_backend` | string | `auto` | Image backend selection. `auto` = prefer runtime-native tool, fall back to the only installed backend, ask if multiple non-native are present. `ask` = always confirm on every run. `<backend-id>` (e.g., `codex-imagegen`, `baoyu-imagine`, `image_generate`) = pin this backend when available; fall back to `auto` when it isn't. Absent = `auto`. |
+| `preferred_image_backend` | string | `auto` | Image backend selection. `auto` = prefer runtime-native tool, fall back to the only installed backend, ask if multiple non-native are present. `ask` = always confirm on every run. `<backend-id>` (e.g., `codex-imagegen`, `baoyu-image-gen`, `image_generate`) = pin this backend when available; fall back to `auto` when it isn't. Absent = `auto`. |
 | `custom_styles` | array | [] | Additional styles available alongside the 21 built-ins |
 
 Backend resolution logic is documented in the `## Image Generation Tools` section of `SKILL.md`. This doc only defines the field.
@@ -47,7 +47,7 @@ Example backend ids:
 | Value | Meaning |
 |-------|---------|
 | `codex-imagegen` | Codex built-in `imagegen` tool |
-| `baoyu-imagine` | `baoyu-imagine` skill / script backend |
+| `baoyu-image-gen` | `baoyu-image-gen` skill / script backend |
 | `image_generate` | Generic runtime image tool such as Hermes |
 
 ## Layout Options

@@ -15,6 +15,9 @@ import remarkCjkFriendly from 'remark-cjk-friendly';
 import remarkParse from 'remark-parse';
 import remarkStringify from 'remark-stringify';
 
+import { preprocessMermaidInMarkdown } from 'baoyu-md';
+import { closeRenderer, renderMermaidToPng } from 'baoyu-chrome-cdp/mermaid';
+
 interface ImageInfo {
   placeholder: string;
   localPath: string;
@@ -318,10 +321,29 @@ export async function parseMarkdown(
     coverImagePath = findCoverImageNearMarkdown(baseDir);
   }
 
+  const { markdown: mermaidProcessedBody, images: mermaidImages } =
+    await preprocessMermaidInMarkdown(body, {
+      baseDir,
+      renderFn: renderMermaidToPng,
+      onError: (error, block) => {
+        const message = error instanceof Error ? error.message : String(error);
+        console.error(
+          `[md-to-html] mermaid render failed (${block.code.slice(0, 40).replace(/\s+/g, ' ')}…): ${message}`,
+        );
+      },
+    });
+
+  if (mermaidImages.length > 0) {
+    const fresh = mermaidImages.filter((image) => !image.cached).length;
+    console.error(
+      `[md-to-html] mermaid: ${mermaidImages.length} block(s), ${fresh} rendered, ${mermaidImages.length - fresh} cached`,
+    );
+  }
+
   const images: Array<{ src: string; alt: string; blockIndex: number }> = [];
   let imageCounter = 0;
 
-  const { html, totalBlocks } = convertMarkdownToHtml(body, (src, alt) => {
+  const { html, totalBlocks } = convertMarkdownToHtml(mermaidProcessedBody, (src, alt) => {
     const placeholder = `XIMGPH_${++imageCounter}`;
     images.push({ src, alt, blockIndex: -1 });
     return placeholder;
@@ -460,8 +482,12 @@ async function main(): Promise<void> {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  await main().catch((err) => {
+  try {
+    await main();
+  } catch (err) {
     console.error(`Error: ${err instanceof Error ? err.message : String(err)}`);
-    process.exit(1);
-  });
+    process.exitCode = 1;
+  } finally {
+    await closeRenderer();
+  }
 }
