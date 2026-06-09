@@ -27,6 +27,7 @@ interface ImageInfo {
   placeholder: string;
   localPath: string;
   originalPath: string;
+  alt?: string;
 }
 
 interface MermaidImageInfo {
@@ -57,6 +58,14 @@ type ConvertMarkdownOptions = Partial<Omit<CliOptions, "inputPath">> & {
   title?: string;
   mermaid?: MermaidCliOptions;
 };
+
+function escapeHtmlAttribute(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
 
 export async function convertMarkdown(
   markdownPath: string,
@@ -160,7 +169,12 @@ export async function convertMarkdown(
 
   let finalContent = fs.readFileSync(finalHtmlPath, "utf-8");
   for (const image of contentImages) {
-    const imgTag = `<img src="${image.originalPath}" data-local-path="${image.localPath}" style="display: block; width: 100%; margin: 1.5em auto;">`;
+    const altAttr = image.alt !== undefined
+      ? ` alt="${escapeHtmlAttribute(image.alt)}"`
+      : "";
+    const imgTag = `<img src="${escapeHtmlAttribute(image.originalPath)}" `
+      + `data-local-path="${escapeHtmlAttribute(image.localPath)}"${altAttr} `
+      + `style="display: block; width: 100%; margin: 1.5em auto;">`;
     finalContent = finalContent.replace(image.placeholder, imgTag);
   }
   fs.writeFileSync(finalHtmlPath, finalContent, "utf-8");

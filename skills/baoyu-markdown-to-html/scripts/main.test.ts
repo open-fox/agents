@@ -54,3 +54,76 @@ test("CLI forwards wrapper title and package render options", async () => {
     /<body[^>]*style="[^"]*font-family: Menlo, Monaco, 'Courier New', monospace;[^"]*font-size: 18px/,
   );
 });
+
+test("CLI renders Obsidian wikilink images with alt text and Attachments fallback", async () => {
+  const root = await makeTempDir("baoyu-markdown-to-html-wikilink-cli-");
+  const attachmentsDir = path.join(root, "Attachments");
+  await fs.mkdir(attachmentsDir, { recursive: true });
+  await fs.writeFile(path.join(root, "a.png"), "a", "utf-8");
+  await fs.writeFile(path.join(attachmentsDir, "b.webp"), "b", "utf-8");
+
+  const markdownPath = path.join(root, "article.md");
+  await fs.writeFile(
+    markdownPath,
+    [
+      "## Section",
+      "",
+      "![[a.png]]",
+      "",
+      "![[b.webp|B alt]]",
+    ].join("\n"),
+    "utf-8",
+  );
+
+  const { stdout } = await execFileAsync(
+    process.execPath,
+    [
+      "--import",
+      "tsx",
+      SCRIPT_PATH,
+      markdownPath,
+      "--keep-title",
+    ],
+    { cwd: SCRIPT_DIR },
+  );
+
+  const result = JSON.parse(stdout.trim()) as {
+    contentImages: Array<{
+      alt?: string;
+      localPath: string;
+      originalPath: string;
+      placeholder: string;
+    }>;
+    htmlPath: string;
+  };
+
+  assert.deepEqual(
+    result.contentImages.map(({ alt, localPath, originalPath, placeholder }) => ({
+      alt,
+      localPath,
+      originalPath,
+      placeholder,
+    })),
+    [
+      {
+        alt: "",
+        localPath: path.join(root, "a.png"),
+        originalPath: "a.png",
+        placeholder: "MDTOHTMLIMGPH_1",
+      },
+      {
+        alt: "B alt",
+        localPath: path.join(attachmentsDir, "b.webp"),
+        originalPath: "b.webp",
+        placeholder: "MDTOHTMLIMGPH_2",
+      },
+    ],
+  );
+
+  const html = await fs.readFile(result.htmlPath, "utf-8");
+  assert.match(html, /<img src="a\.png" data-local-path="[^"]+a\.png" alt=""/);
+  assert.match(
+    html,
+    /<img src="b\.webp" data-local-path="[^"]+Attachments[^"]+b\.webp" alt="B alt"/,
+  );
+});

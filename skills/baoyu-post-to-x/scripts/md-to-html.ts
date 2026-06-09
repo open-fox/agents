@@ -1,10 +1,8 @@
 import fs from 'node:fs';
 import { mkdir, writeFile } from 'node:fs/promises';
-import https from 'node:https';
 import os from 'node:os';
 import path from 'node:path';
 import process from 'node:process';
-import { createHash } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 
 import frontMatter from 'front-matter';
@@ -15,7 +13,11 @@ import remarkCjkFriendly from 'remark-cjk-friendly';
 import remarkParse from 'remark-parse';
 import remarkStringify from 'remark-stringify';
 
-import { preprocessMermaidInMarkdown } from 'baoyu-md';
+import {
+  preprocessMermaidInMarkdown,
+  replaceMarkdownImagesWithPlaceholders,
+  resolveImagePath,
+} from 'baoyu-md';
 import { closeRenderer, renderMermaidToPng } from 'baoyu-chrome-cdp/mermaid';
 
 interface ImageInfo {
@@ -23,6 +25,7 @@ interface ImageInfo {
   localPath: string;
   originalPath: string;
   blockIndex: number;
+  alt?: string;
 }
 
 interface ParsedMarkdown {
@@ -109,85 +112,6 @@ function extractTitleFromMarkdown(markdown: string): string {
   return '';
 }
 
-function downloadFile(url: string, destPath: string, maxRedirects = 5): Promise<void> {
-  return new Promise((resolve, reject) => {
-    if (!url.startsWith('https://')) {
-      reject(new Error(`Refusing non-HTTPS download: ${url}`));
-      return;
-    }
-    if (maxRedirects <= 0) {
-      reject(new Error('Too many redirects'));
-      return;
-    }
-    const file = fs.createWriteStream(destPath);
-
-    const request = https.get(url, { headers: { 'User-Agent': 'Mozilla/5.0' } }, (response) => {
-      if (response.statusCode === 301 || response.statusCode === 302) {
-        const redirectUrl = response.headers.location;
-        if (redirectUrl) {
-          file.close();
-          fs.unlinkSync(destPath);
-          downloadFile(redirectUrl, destPath, maxRedirects - 1).then(resolve).catch(reject);
-          return;
-        }
-      }
-
-      if (response.statusCode !== 200) {
-        file.close();
-        fs.unlinkSync(destPath);
-        reject(new Error(`Failed to download: ${response.statusCode}`));
-        return;
-      }
-
-      response.pipe(file);
-      file.on('finish', () => {
-        file.close();
-        resolve();
-      });
-    });
-
-    request.on('error', (err) => {
-      file.close();
-      fs.unlink(destPath, () => {});
-      reject(err);
-    });
-
-    request.setTimeout(30000, () => {
-      request.destroy();
-      reject(new Error('Download timeout'));
-    });
-  });
-}
-
-function getImageExtension(urlOrPath: string): string {
-  const match = urlOrPath.match(/\.(jpg|jpeg|png|gif|webp)(\?|$)/i);
-  return match ? match[1]!.toLowerCase() : 'png';
-}
-
-async function resolveImagePath(imagePath: string, baseDir: string, tempDir: string): Promise<string> {
-  if (imagePath.startsWith('http://')) {
-    console.error(`[md-to-html] Skipping non-HTTPS image: ${imagePath}`);
-    return '';
-  }
-  if (imagePath.startsWith('https://')) {
-    const hash = createHash('md5').update(imagePath).digest('hex').slice(0, 8);
-    const ext = getImageExtension(imagePath);
-    const localPath = path.join(tempDir, `remote_${hash}.${ext}`);
-
-    if (!fs.existsSync(localPath)) {
-      console.error(`[md-to-html] Downloading: ${imagePath}`);
-      await downloadFile(imagePath, localPath);
-    }
-    return localPath;
-  }
-
-  if (path.isAbsolute(imagePath)) {
-    return imagePath;
-  }
-
-  return path.resolve(baseDir, imagePath);
-}
-
 function escapeHtml(text: string): string {
   return text
     .replace(/&/g, '&amp;')
@@ -195,6 +119,10 @@ function escapeHtml(text: string): string {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
+}
+
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 function highlightCode(code: string, lang: string): string {
@@ -222,7 +150,7 @@ function preprocessCjkMarkdown(markdown: string): string {
   }
 }
 
-function convertMarkdownToHtml(markdown: string, imageCallback: (src: string, alt: string) => string): { html: string; totalBlocks: number } {
+function convertMarkdownToHtml(markdown: string): { html: string; totalBlocks: number } {
   const preprocessedMarkdown = preprocessCjkMarkdown(markdown);
   const blockTokens = Lexer.lex(preprocessedMarkdown, { gfm: true, breaks: true });
 
@@ -254,7 +182,7 @@ function convertMarkdownToHtml(markdown: string, imageCallback: (src: string, al
 
     image({ href, text }: Tokens.Image): string {
       if (!href) return '';
-      return imageCallback(href, text ?? '');
+      return escapeHtml(text ?? '');
     },
 
     link({ href, title, tokens, text }: Tokens.Link): string {
@@ -340,22 +268,20 @@ export async function parseMarkdown(
     );
   }
 
-  const images: Array<{ src: string; alt: string; blockIndex: number }> = [];
-  let imageCounter = 0;
-
-  const { html, totalBlocks } = convertMarkdownToHtml(mermaidProcessedBody, (src, alt) => {
-    const placeholder = `XIMGPH_${++imageCounter}`;
-    images.push({ src, alt, blockIndex: -1 });
-    return placeholder;
-  });
+  const { images, markdown: rewrittenBody } = replaceMarkdownImagesWithPlaceholders(
+    mermaidProcessedBody,
+    'XIMGPH_',
+  );
+  const { html, totalBlocks } = convertMarkdownToHtml(rewrittenBody);
 
   const htmlLines = html.split('\n');
+  const imageBlockIndexes = new Map<string, number>();
   for (let i = 0; i < images.length; i++) {
-    const placeholder = `XIMGPH_${i + 1}`;
+    const placeholder = images[i]!.placeholder;
     for (let lineIndex = 0; lineIndex < htmlLines.length; lineIndex++) {
-      const regex = new RegExp(`\\b${placeholder}\\b`);
+      const regex = new RegExp(`\\b${escapeRegExp(placeholder)}\\b`);
       if (regex.test(htmlLines[lineIndex]!)) {
-        images[i]!.blockIndex = lineIndex;
+        imageBlockIndexes.set(placeholder, lineIndex);
         break;
       }
     }
@@ -366,17 +292,18 @@ export async function parseMarkdown(
 
   for (let i = 0; i < images.length; i++) {
     const img = images[i]!;
-    const localPath = await resolveImagePath(img.src, baseDir, tempDir);
+    const localPath = await resolveImagePath(img.originalPath, baseDir, tempDir, 'md-to-html');
 
     if (i === 0 && !coverImagePath) {
       firstImageAsCover = localPath;
     }
 
     contentImages.push({
-      placeholder: `XIMGPH_${i + 1}`,
+      placeholder: img.placeholder,
       localPath,
-      originalPath: img.src,
-      blockIndex: img.blockIndex,
+      originalPath: img.originalPath,
+      alt: img.alt,
+      blockIndex: imageBlockIndexes.get(img.placeholder) ?? -1,
     });
   }
 
@@ -384,7 +311,7 @@ export async function parseMarkdown(
 
   let resolvedCoverImage: string | null = null;
   if (coverImagePath) {
-    resolvedCoverImage = await resolveImagePath(coverImagePath, baseDir, tempDir);
+    resolvedCoverImage = await resolveImagePath(coverImagePath, baseDir, tempDir, 'md-to-html');
   } else if (firstImageAsCover) {
     resolvedCoverImage = firstImageAsCover;
   }

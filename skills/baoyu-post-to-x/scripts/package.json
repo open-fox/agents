@@ -3,8 +3,8 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "baoyu-chrome-cdp": "^0.1.0",
-    "baoyu-md": "^0.1.0",
+    "baoyu-chrome-cdp": "^0.1.1",
+    "baoyu-md": "^0.1.1",
     "front-matter": "^4.0.2",
     "highlight.js": "^11.11.1",
     "marked": "^15.0.6",

@@ -24,9 +24,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/kepano/obsidian-skills.git",
       "skillPath": "skills/obsidian-markdown/SKILL.md",
-      "skillFolderHash": "5caf5d9e7de204f3904216857545f2aa36bcfcac",
+      "skillFolderHash": "4723197c6dc59abc29819da87863b1ac20b96095",
       "installedAt": "2026-04-02T14:06:02.436Z",
-      "updatedAt": "2026-04-02T14:06:02.436Z"
+      "updatedAt": "2026-06-09T06:22:43.488Z"
     },
     "agent-browser": {
       "source": "vercel-labs/agent-browser",
@@ -78,18 +78,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/jimliu/baoyu-skills.git",
       "skillPath": "skills/baoyu-markdown-to-html/SKILL.md",
-      "skillFolderHash": "a66e6fb976a6150cff23802f939adb6fc87c739d",
+      "skillFolderHash": "441d1137bd34e485c94aebb1c4b10d92169a7d2d",
       "installedAt": "2026-04-02T14:10:17.715Z",
-      "updatedAt": "2026-05-27T01:22:21.120Z"
+      "updatedAt": "2026-06-09T06:22:51.056Z"
     },
     "baoyu-post-to-x": {
       "source": "jimliu/baoyu-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/jimliu/baoyu-skills.git",
       "skillPath": "skills/baoyu-post-to-x/SKILL.md",
-      "skillFolderHash": "1088d63bb83af7405fd6ed0470804899b849ca1b",
+      "skillFolderHash": "9a4e31a30ee413804acfb8074069118a076d462c",
       "installedAt": "2026-04-02T14:10:20.624Z",
-      "updatedAt": "2026-05-27T01:22:26.136Z"
+      "updatedAt": "2026-06-09T06:22:57.894Z"
     },
     "baoyu-slide-deck": {
       "source": "jimliu/baoyu-skills",
@@ -141,9 +141,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/firecrawl/cli.git",
       "skillPath": "skills/firecrawl-cli/SKILL.md",
-      "skillFolderHash": "2c76bf1588e1f4bc19a2f8ff7b83ab776aacff0e",
+      "skillFolderHash": "462e63d49999b098ef5723706e47bf892708b9ec",
       "installedAt": "2026-04-02T14:25:18.505Z",
-      "updatedAt": "2026-05-27T01:22:40.703Z"
+      "updatedAt": "2026-06-09T06:23:00.451Z"
     },
     "slidev": {
       "source": "antfu/skills",
@@ -234,10 +234,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/engineering/grill-with-docs/SKILL.md",
-      "skillFolderHash": "2c6aa7079cc705a6e0c319fcf23a0fa39968de29",
-      "pluginName": "mattpocock-skills",
+      "skillFolderHash": "2c3a4e48571bfe42203ed7b49cae85f31ef4b6f2",
       "installedAt": "2026-05-20T08:50:34.867Z",
-      "updatedAt": "2026-05-20T08:50:34.867Z"
+      "updatedAt": "2026-06-09T06:23:03.875Z"
     },
     "handoff": {
       "source": "mattpocock/skills",
@@ -304,10 +303,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/engineering/to-prd/SKILL.md",
-      "skillFolderHash": "d6eff3e99a325d2d9c2acbe31b4d76fa5340a154",
-      "pluginName": "mattpocock-skills",
+      "skillFolderHash": "fb4503f54bc618da08df2fd74109fbe57e4d8150",
       "installedAt": "2026-05-20T08:50:34.871Z",
-      "updatedAt": "2026-05-20T08:50:34.871Z"
+      "updatedAt": "2026-06-09T06:23:06.989Z"
     },
     "triage": {
       "source": "mattpocock/skills",
