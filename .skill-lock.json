@@ -426,6 +426,15 @@
       "skillFolderHash": "d1175a5a5807a6783a3d896f720645b39f736dbb",
       "installedAt": "2026-07-08T02:00:00.380Z",
       "updatedAt": "2026-07-08T02:04:21.617Z"
+    },
+    "computer-use": {
+      "source": "stablyai/orca",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/stablyai/orca.git",
+      "skillPath": "skills/computer-use/SKILL.md",
+      "skillFolderHash": "b3fb19187d9775774df2a93d59e9e0003093e4a2",
+      "installedAt": "2026-07-08T11:18:18.113Z",
+      "updatedAt": "2026-07-08T11:18:18.113Z"
     }
   },
   "dismissed": {
@@ -444,9 +453,6 @@
     "kimi-code-cli",
     "opencode",
     "warp",
-    "zed",
-    "claude-code",
-    "codebuddy",
-    "pi"
+    "zed"
   ]
 }
