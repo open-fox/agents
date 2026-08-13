@@ -145,33 +145,6 @@
       "installedAt": "2026-04-02T14:29:45.438Z",
       "updatedAt": "2026-08-13T08:57:42.612Z"
     },
-    "minimax-docx": {
-      "source": "minimax-ai/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/minimax-ai/skills.git",
-      "skillPath": "skills/minimax-docx/SKILL.md",
-      "skillFolderHash": "e55cc73859c0fd9bcd6507f062eedca0f470a7ed",
-      "installedAt": "2026-04-02T14:55:55.833Z",
-      "updatedAt": "2026-04-02T14:55:55.833Z"
-    },
-    "minimax-pdf": {
-      "source": "minimax-ai/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/minimax-ai/skills.git",
-      "skillPath": "skills/minimax-pdf/SKILL.md",
-      "skillFolderHash": "ce691d0e4e34b7f1d73bd3c3560b658df0dbdb3a",
-      "installedAt": "2026-04-02T14:55:57.368Z",
-      "updatedAt": "2026-04-02T14:55:57.368Z"
-    },
-    "minimax-xlsx": {
-      "source": "minimax-ai/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/minimax-ai/skills.git",
-      "skillPath": "skills/minimax-xlsx/SKILL.md",
-      "skillFolderHash": "5df30fd8f8669f34850767e1d99ba93c97d6ffc7",
-      "installedAt": "2026-04-02T14:55:58.047Z",
-      "updatedAt": "2026-04-02T14:55:58.047Z"
-    },
     "editorial-card-screenshot": {
       "source": "shaom/infocard-skills",
       "sourceType": "github",
@@ -189,78 +162,6 @@
       "skillFolderHash": "ceca95bf1ce9e1e66d6fac7f58b0ab69ae9e1771",
       "installedAt": "2026-04-03T14:48:30.176Z",
       "updatedAt": "2026-08-13T08:58:07.547Z"
-    },
-    "grill-me": {
-      "source": "mattpocock/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/mattpocock/skills.git",
-      "skillPath": "skills/productivity/grill-me/SKILL.md",
-      "skillFolderHash": "c817f6f36acd483294144694a935a76d3e3eb101",
-      "installedAt": "2026-05-20T08:50:34.867Z",
-      "updatedAt": "2026-08-13T08:58:11.237Z"
-    },
-    "grill-with-docs": {
-      "source": "mattpocock/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/mattpocock/skills.git",
-      "skillPath": "skills/engineering/grill-with-docs/SKILL.md",
-      "skillFolderHash": "5fdcdeedf2d0c73b3ecb1da0a464dd885590f8d6",
-      "installedAt": "2026-05-20T08:50:34.867Z",
-      "updatedAt": "2026-08-13T08:58:13.838Z"
-    },
-    "handoff": {
-      "source": "mattpocock/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/mattpocock/skills.git",
-      "skillPath": "skills/productivity/handoff/SKILL.md",
-      "skillFolderHash": "184d485ae68a2132893a94239b2b85d253e6152b",
-      "installedAt": "2026-05-20T08:50:34.868Z",
-      "updatedAt": "2026-08-13T08:58:16.156Z"
-    },
-    "improve-codebase-architecture": {
-      "source": "mattpocock/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/mattpocock/skills.git",
-      "skillPath": "skills/engineering/improve-codebase-architecture/SKILL.md",
-      "skillFolderHash": "6a971d1f5b109ac817e18c0f0419c2a32d60f26a",
-      "installedAt": "2026-05-20T08:50:34.868Z",
-      "updatedAt": "2026-08-13T08:58:18.855Z"
-    },
-    "prototype": {
-      "source": "mattpocock/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/mattpocock/skills.git",
-      "skillPath": "skills/engineering/prototype/SKILL.md",
-      "skillFolderHash": "57569dda16077a016b8fb82494dbf9f6430d7cc4",
-      "installedAt": "2026-05-20T08:50:34.869Z",
-      "updatedAt": "2026-08-13T08:58:22.480Z"
-    },
-    "setup-matt-pocock-skills": {
-      "source": "mattpocock/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/mattpocock/skills.git",
-      "skillPath": "skills/engineering/setup-matt-pocock-skills/SKILL.md",
-      "skillFolderHash": "abf20c04a4aa8a37ff20aa7286f28857150f8b8d",
-      "installedAt": "2026-05-20T08:50:34.869Z",
-      "updatedAt": "2026-08-13T08:58:25.605Z"
-    },
-    "tdd": {
-      "source": "mattpocock/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/mattpocock/skills.git",
-      "skillPath": "skills/engineering/tdd/SKILL.md",
-      "skillFolderHash": "423f3cc2bccf3b0ed426fb35eeb4b38d9188a343",
-      "installedAt": "2026-05-20T08:50:34.870Z",
-      "updatedAt": "2026-08-13T08:58:28.743Z"
-    },
-    "triage": {
-      "source": "mattpocock/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/mattpocock/skills.git",
-      "skillPath": "skills/engineering/triage/SKILL.md",
-      "skillFolderHash": "b20940845332f540e3f17b0cb32d45fd8c2298bf",
-      "installedAt": "2026-05-20T08:50:34.871Z",
-      "updatedAt": "2026-08-13T08:58:31.597Z"
     },
     "agents-sdk": {
       "source": "cloudflare/skills",
@@ -324,24 +225,6 @@
       "skillFolderHash": "45cc198b2aad3f06e8abf91333f55fbe7579f659",
       "installedAt": "2026-05-28T11:49:26.971Z",
       "updatedAt": "2026-05-28T11:49:26.971Z"
-    },
-    "orchestration": {
-      "source": "stablyai/orca",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/stablyai/orca.git",
-      "skillPath": "skills/orchestration/SKILL.md",
-      "skillFolderHash": "9aa26fde93c0592e5983cdca1ccd33b402802255",
-      "installedAt": "2026-07-08T01:26:23.244Z",
-      "updatedAt": "2026-08-13T08:58:46.950Z"
-    },
-    "orca-cli": {
-      "source": "stablyai/orca",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/stablyai/orca.git",
-      "skillPath": "skills/orca-cli/SKILL.md",
-      "skillFolderHash": "a5a90c9731fbee834eca6d655b39eaa795dd2323",
-      "installedAt": "2026-07-08T02:00:00.380Z",
-      "updatedAt": "2026-08-13T08:58:55.994Z"
     },
     "computer-use": {
       "source": "stablyai/orca",
