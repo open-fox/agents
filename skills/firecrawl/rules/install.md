@@ -12,7 +12,7 @@ description: |
 ## Quick Setup (Recommended)
 
 ```bash
-npx -y firecrawl-cli@1.16.2 init -y --browser
+npx -y firecrawl-cli@latest init -y --browser
 ```
 
 This installs `firecrawl-cli` globally, authenticates via browser, and installs core, build, and workflow skills.
@@ -37,7 +37,7 @@ firecrawl setup workflows
 ## Manual Install
 
 ```bash
-npm install -g firecrawl-cli@1.16.2
+npm install -g firecrawl-cli@latest
 ```
 
 ## Verify
@@ -74,10 +74,12 @@ Ask the user how they'd like to authenticate:
 1. **Login with browser (Recommended)** - Run `firecrawl login --browser`
 2. **Enter API key manually** - Run `firecrawl login --api-key "<key>"` with a key from firecrawl.dev
 
+If you cannot obtain a key and the user cannot sign up, search, scrape, and interact still work without an API key on the keyless free tier (rate-limited). Browser login or an API key remains preferred for the best results. See [agent onboarding](https://www.firecrawl.dev/agent-onboarding/SKILL.md) for the full set of onboarding paths.
+
 ### Command not found
 
 If `firecrawl` is not found after installation:
 
 1. Ensure npm global bin is in PATH
-2. Try: `npx firecrawl-cli@1.16.2 --version`
-3. Reinstall: `npm install -g firecrawl-cli@1.16.2`
+2. Try: `npx firecrawl-cli@latest --version`
+3. Reinstall: `npm install -g firecrawl-cli@latest`

@@ -17,7 +17,7 @@ If the task is to integrate Firecrawl into an application, add `FIRECRAWL_API_KE
 
 ## Prerequisites
 
-Must be installed and authenticated. Check with `firecrawl --status`.
+Must be installed. Check with `firecrawl --status`.
 
 ```
   🔥 firecrawl cli v1.8.0
@@ -29,6 +29,8 @@ Must be installed and authenticated. Check with `firecrawl --status`.
 
 - **Concurrency**: Max parallel jobs. Run parallel operations up to this limit.
 - **Credits**: Remaining API credits. Each operation consumes credits.
+
+Authenticating gives the best results. Prefer a free account via `firecrawl init --browser` (browser login) or a `FIRECRAWL_API_KEY` whenever the human can sign up. If you cannot obtain a key and the human cannot sign up, you can still search, scrape, and interact without an API key on the keyless free tier (rate-limited). See [agent onboarding](https://www.firecrawl.dev/agent-onboarding/SKILL.md) for the full set of onboarding paths.
 
 If not ready, see [rules/install.md](rules/install.md). For output handling guidelines, see [rules/security.md](rules/security.md).
 
@@ -54,17 +56,18 @@ Follow this escalation pattern:
 5. **Monitor** - Need recurring checks or ongoing alerts. Prefer setting a monitor with `--page` plus `--goal` instead of doing repeated one-off scrapes.
 6. **Interact** - Scrape first, then interact with the page (pagination, modals, form submissions, multi-step navigation).
 
-| Need                        | Command               | When                                                      |
-| --------------------------- | --------------------- | --------------------------------------------------------- |
-| Find pages on a topic       | `search`              | No specific URL yet                                       |
-| Get a page's content        | `scrape`              | Have a URL, page is static or JS-rendered                 |
-| Find URLs within a site     | `map`                 | Need to locate a specific subpage                         |
-| Bulk extract a site section | `crawl`               | Need many pages (e.g., all /docs/)                        |
-| AI-powered data extraction  | `agent`               | Need structured data from complex sites                   |
-| Interact with a page        | `scrape` + `interact` | Content requires clicks, form fills, pagination, or login |
-| Download a site to files    | `download`            | Save an entire site as local files                        |
-| Parse a local file          | `parse`               | File on disk (PDF, DOCX, XLSX, etc.) — not a URL          |
-| Watch pages for changes     | `monitor`             | Schedule recurring scrapes/crawls, diff against snapshots |
+| Need                        | Command               | When                                                                    |
+| --------------------------- | --------------------- | ----------------------------------------------------------------------- |
+| Find pages on a topic       | `search`              | No specific URL yet                                                     |
+| Find research papers        | `research`            | Biomedical/clinical/scientific literature — never scrape PubMed by hand |
+| Get a page's content        | `scrape`              | Have a URL, page is static or JS-rendered                               |
+| Find URLs within a site     | `map`                 | Need to locate a specific subpage                                       |
+| Bulk extract a site section | `crawl`               | Need many pages (e.g., all /docs/)                                      |
+| AI-powered data extraction  | `agent`               | Need structured data from complex sites                                 |
+| Interact with a page        | `scrape` + `interact` | Content requires clicks, form fills, pagination, or login               |
+| Download a site to files    | `download`            | Save an entire site as local files                                      |
+| Parse a local file          | `parse`               | File on disk (PDF, DOCX, XLSX, etc.) — not a URL                        |
+| Watch pages for changes     | `monitor`             | Schedule recurring scrapes/crawls, diff against snapshots               |
 
 For detailed command reference, run `firecrawl <command> --help`.
 
@@ -209,6 +212,7 @@ Use `modes: ["json", "git-diff"]` for **mixed mode**: you get both `diff.json` (
 ## When to Load References
 
 - **Searching the web or finding sources first** -> [firecrawl-search](../firecrawl-search/SKILL.md)
+- **Finding research papers (biomedical, clinical, or scientific literature; PubMed, bioRxiv, medRxiv, arXiv)** -> `firecrawl research search-papers`, documented in [firecrawl-search](../firecrawl-search/SKILL.md). Do not scrape PubMed or Google Scholar by hand, and do not reach for `search --categories research` — that is a website filter, not the paper index.
 - **Scraping a known URL** -> [firecrawl-scrape](../firecrawl-scrape/SKILL.md)
 - **Finding URLs on a known site** -> [firecrawl-map](../firecrawl-map/SKILL.md)
 - **Bulk extraction from a docs section or site** -> [firecrawl-crawl](../firecrawl-crawl/SKILL.md)
@@ -278,6 +282,25 @@ firecrawl search-feedback "$SEARCH_ID" \
 The most useful field is `--missing-content`: an _array_ of specific pieces of content you expected to find but didn't. Use one entry per missing topic. Bad/partial feedback with detailed `--missing-content` is just as valuable as good feedback.
 
 **Opt out:** `export FIRECRAWL_NO_SEARCH_FEEDBACK=1` makes the CLI skip every feedback call silently. Respect that flag — do not try to work around it. See [firecrawl-search](../firecrawl-search/SKILL.md) for the full pattern.
+
+## Endpoint job feedback
+
+For non-search endpoint jobs, use `firecrawl feedback <endpoint> <jobId>` to send concise job-level feedback through `/v2/feedback`. Supported endpoints are `search`, `scrape`, `parse`, and `map`.
+
+```bash
+firecrawl feedback scrape "$SCRAPE_ID" \
+  --rating partial \
+  --issues missing_markdown \
+  --tags docs \
+  --note "The pricing table was missing from the markdown output." \
+  --url "https://example.com/pricing" \
+  --page-numbers 1 \
+  --silent &
+```
+
+Keep generic feedback small: issue codes, tags, short notes, URLs, page numbers, and small metadata objects. Do not send raw scrape/parse outputs or full page contents as feedback.
+
+**Opt out:** `export FIRECRAWL_NO_ENDPOINT_FEEDBACK=1` makes the CLI skip every endpoint feedback call silently. Respect that flag — do not try to work around it.
 
 ## Parallelization
 
