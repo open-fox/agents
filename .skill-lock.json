@@ -575,6 +575,15 @@
       "skillFolderHash": "27df218b1e8ce7f639326a2e41048ae8c2c6418a",
       "installedAt": "2026-08-30T02:40:24.998Z",
       "updatedAt": "2026-10-08T07:41:20.852Z"
+    },
+    "tanstarter-create": {
+      "source": "MkFastHQ/tanstarter-cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/MkFastHQ/tanstarter-cli.git",
+      "skillPath": "skills/tanstarter-create/SKILL.md",
+      "skillFolderHash": "e97705a832ec9f39c6538c8ff5d4b0ea17dc5223",
+      "installedAt": "2026-08-13T13:25:17.303Z",
+      "updatedAt": "2026-08-13T13:25:17.303Z"
     }
   },
   "dismissed": {
