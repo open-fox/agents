@@ -65,7 +65,7 @@ Options:
 | Option | Default | Description |
 |--------|---------|-------------|
 | `--output` | - | Output filename |
-| `--format` | pdf | pdf / png / pptx / md |
+| `--format` | pdf | pdf / png / pptx / pptx-editable / md |
 | `--timeout` | 30000 | Timeout per slide (ms) |
 | `--range` | - | Slide range (e.g., 1,4-7) |
 | `--dark` | false | Export dark mode |
@@ -92,6 +92,14 @@ slidev format [entry]
 ```
 
 Formats the slides markdown file.
+
+## MCP Server
+
+```bash
+slidev mcp [entry]
+```
+
+Starts an MCP (Model Context Protocol) server over stdio for AI agents to inspect and edit the slides. When a dev server is running, an HTTP MCP endpoint is also available at `http://localhost:<port>/__mcp`. See [tool-mcp](tool-mcp.md).
 
 ## Theme Eject
 
