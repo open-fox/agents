@@ -34,7 +34,7 @@ No single provider finds everyone, and the ones that find the most also return m
 4. **Mobile numbers are for Tier 1 only.** They're the most expensive field, and many are personal phones (see the phone rules in compliance.md). For EU and UK numbers, providers with human-verified European data tend to do better.
 5. **Keep the enrichment result in your data, not just the sending tool**, so you can re-verify later and answer data subject requests.
 
-Clay is the common way to orchestrate a waterfall across many providers. FullEnrich and similar aggregators do it as a single API call. Building it yourself means calling each provider's API in sequence.
+For acceptance rules per field, cache keys, and how to treat errors versus genuine no-matches, see [enrichment-playbook.md](enrichment-playbook.md). Clay is the common way to orchestrate a waterfall across many providers. FullEnrich and similar aggregators do it as a single API call. Building it yourself means calling each provider's API in sequence.
 
 ### Provider bake-off
 

@@ -145,6 +145,19 @@
         "Neither sends all blindly nor drops all by default"
       ],
       "files": []
+    },
+    {
+      "id": 10,
+      "prompt": "We have 200 B2B prospects and several connected enrichment providers. Some records are fresh in our cache, some caches are expired, one API says429 and another finds a same-name company in the wrong country. Design a cost-bounded waterfall without overwriting verified CRM contacts.",
+      "expected_output": "Defines identity and accepted-field criteria, exact account/provider/input cache matching, differentiated expiry/no-match/error handling, and conditional ordered lookups. Preserves stronger CRM evidence, contact verification, and unresolved reasons.",
+      "assertions": [
+        "Reuses only applicable fresh cache entries",
+        "Does not treat429 or timeout as no-match",
+        "Rejects a wrong-entity result instead of counting any nonempty response as success",
+        "Stops when an accepted field is found instead of running every provider",
+        "Preserves stronger verified CRM fields and separate contact verification"
+      ],
+      "files": []
     }
   ]
 }

@@ -2,7 +2,7 @@
 name: revops
 description: "When the user wants help with revenue operations, lead lifecycle management, or marketing-to-sales handoff processes. Also use when the user mentions 'RevOps,' 'revenue operations,' 'lead scoring,' 'outbound pipeline stages,' 'lead routing,' 'MQL,' 'SQL,' 'pipeline stages,' 'deal desk,' 'CRM automation,' 'marketing-to-sales handoff,' 'data hygiene,' 'leads aren't getting to sales,' 'pipeline management,' 'lead qualification,' or 'when should marketing hand off to sales.' Use this for anything involving the systems and processes that connect marketing to revenue. For cold outreach emails, see cold-email. For email drip campaigns, see emails. For pricing decisions, see pricing."
 metadata:
-  version: 2.1.0
+  version: 2.2.0
 ---
 
 # RevOps
@@ -147,6 +147,8 @@ Response time is the single biggest factor in lead conversion:
 - After **24 hours**, the lead is effectively cold
 
 Build routing rules that prioritize speed. Alert reps immediately. Escalate if SLA is missed.
+
+For form-submit enrichment, booking branches, missing-data fallbacks, and late results, load [the inbound-routing playbook](references/inbound-routing.md). Use it alongside the ownership and territory rules below.
 
 **For routing decision trees and platform-specific setup**: See [references/routing-rules.md](references/routing-rules.md)
 

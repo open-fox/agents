@@ -46,15 +46,6 @@
       "installedAt": "2026-04-02T14:10:08.098Z",
       "updatedAt": "2026-08-13T08:57:16.424Z"
     },
-    "baoyu-compress-image": {
-      "source": "jimliu/baoyu-skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/jimliu/baoyu-skills.git",
-      "skillPath": "skills/baoyu-compress-image/SKILL.md",
-      "skillFolderHash": "20c6b0e332dd370d45859d995f1c89835270138d",
-      "installedAt": "2026-04-02T14:10:09.748Z",
-      "updatedAt": "2026-04-29T02:57:57.996Z"
-    },
     "baoyu-cover-image": {
       "source": "jimliu/baoyu-skills",
       "sourceType": "github",
@@ -82,24 +73,6 @@
       "installedAt": "2026-04-02T14:10:17.715Z",
       "updatedAt": "2026-06-09T06:22:51.056Z"
     },
-    "baoyu-post-to-x": {
-      "source": "jimliu/baoyu-skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/jimliu/baoyu-skills.git",
-      "skillPath": "skills/baoyu-post-to-x/SKILL.md",
-      "skillFolderHash": "d2ca4089645c52b8f3269cde2c16c39f26039718",
-      "installedAt": "2026-04-02T14:10:20.624Z",
-      "updatedAt": "2026-08-13T08:57:28.673Z"
-    },
-    "baoyu-slide-deck": {
-      "source": "jimliu/baoyu-skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/jimliu/baoyu-skills.git",
-      "skillPath": "skills/baoyu-slide-deck/SKILL.md",
-      "skillFolderHash": "2cbf7307e916673daccc56e375de9cedf087991a",
-      "installedAt": "2026-04-02T14:10:21.674Z",
-      "updatedAt": "2026-08-13T08:57:32.922Z"
-    },
     "baoyu-xhs-images": {
       "source": "jimliu/baoyu-skills",
       "sourceType": "github",
@@ -123,18 +96,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/coreyhaines31/marketingskills.git",
       "skillPath": "skills/seo-audit/SKILL.md",
-      "skillFolderHash": "0bcdb4311b9073b4b5ffc2acfd1886d2892853fb",
+      "skillFolderHash": "7aa1a3602b909a511c92516da3d7d4d2b9c89159",
       "installedAt": "2026-04-02T14:21:56.370Z",
-      "updatedAt": "2026-10-08T07:39:06.889Z"
+      "updatedAt": "2026-10-12T06:48:19.784Z"
     },
     "firecrawl": {
       "source": "firecrawl/cli",
       "sourceType": "github",
       "sourceUrl": "https://github.com/firecrawl/cli.git",
       "skillPath": "skills/firecrawl/SKILL.md",
-      "skillFolderHash": "f60ff25919e8bdf45cdfc6e25549463a957ce461",
+      "skillFolderHash": "197b2b7f1f8be884d65a0142f3b4d25b31901efe",
       "installedAt": "2026-04-02T14:25:18.505Z",
-      "updatedAt": "2026-10-08T07:39:08.900Z"
+      "updatedAt": "2026-10-12T06:48:21.701Z"
     },
     "editorial-card-screenshot": {
       "source": "shaom/infocard-skills",
@@ -168,9 +141,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/cloudflare/skills.git",
       "skillPath": "skills/cloudflare/SKILL.md",
-      "skillFolderHash": "f9aa5dc020f8b8d5291611a22616efc8b1bcde77",
+      "skillFolderHash": "1a76daddc33b559e0a94f6fa2c16c7a582e86aa6",
       "installedAt": "2026-05-28T11:49:26.966Z",
-      "updatedAt": "2026-10-08T07:40:20.994Z"
+      "updatedAt": "2026-10-12T06:48:25.073Z"
     },
     "cloudflare-email-service": {
       "source": "cloudflare/skills",
@@ -398,9 +371,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/engineering/wizard/SKILL.md",
-      "skillFolderHash": "47010ebd1f26c8263016f14cdba835355d278b9a",
+      "skillFolderHash": "e396d3ba97c723a78ffd350fb14a3c409137b306",
       "installedAt": "2026-08-22T10:44:39.607Z",
-      "updatedAt": "2026-10-08T07:41:04.930Z"
+      "updatedAt": "2026-10-12T06:48:27.206Z"
     },
     "claude-handoff": {
       "source": "mattpocock/skills",
@@ -602,6 +575,15 @@
       "skillFolderHash": "c76ed6e055853aef0129877cd27c465fe38da239",
       "installedAt": "2026-10-12T02:23:56.269Z",
       "updatedAt": "2026-10-12T02:23:56.269Z"
+    },
+    "asd-ste100": {
+      "source": "danyuchn/asd-ste100-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/danyuchn/asd-ste100-skill.git",
+      "skillPath": "SKILL.md",
+      "skillFolderHash": "32511c6992ecb5f1971e46a2943f2e6adceedafe",
+      "installedAt": "2026-10-12T06:45:55.614Z",
+      "updatedAt": "2026-10-12T06:45:55.614Z"
     }
   },
   "dismissed": {
