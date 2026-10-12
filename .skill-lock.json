@@ -584,6 +584,24 @@
       "skillFolderHash": "e97705a832ec9f39c6538c8ff5d4b0ea17dc5223",
       "installedAt": "2026-08-13T13:25:17.303Z",
       "updatedAt": "2026-08-13T13:25:17.303Z"
+    },
+    "archify": {
+      "source": "tt-a1i/archify",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/tt-a1i/archify.git",
+      "skillPath": "archify/SKILL.md",
+      "skillFolderHash": "a38bc1bc9e97804aa5d23f09c357ac23e096eb54",
+      "installedAt": "2026-10-12T02:23:20.870Z",
+      "updatedAt": "2026-10-12T02:23:20.870Z"
+    },
+    "reverse-engineer-anything": {
+      "source": "shijianzhong/rea",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/shijianzhong/rea.git",
+      "skillPath": "skills/reverse-engineer-anything/SKILL.md",
+      "skillFolderHash": "c76ed6e055853aef0129877cd27c465fe38da239",
+      "installedAt": "2026-10-12T02:23:56.269Z",
+      "updatedAt": "2026-10-12T02:23:56.269Z"
     }
   },
   "dismissed": {
