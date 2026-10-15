@@ -1,0 +1,7 @@
+interface:
+  display_name: "Design Artifact"
+  short_description: "Creative direction for polished HTML artifacts"
+  default_prompt: "Use $design-artifact to design a polished HTML artifact."
+
+policy:
+  allow_implicit_invocation: true

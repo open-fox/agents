@@ -574,6 +574,44 @@
       "skillFolderHash": "3944283c183eea13fe5bd902b572da3b4de8bf44",
       "installedAt": "2026-10-12T06:45:55.614Z",
       "updatedAt": "2026-10-15T02:49:21.336Z"
+    },
+    "playwright": {
+      "source": "openai/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/openai/skills.git",
+      "skillPath": "skills/.curated/playwright/SKILL.md",
+      "skillFolderHash": "74888f3c1d5581aea6415e78d5fbd760a8ab2a41",
+      "installedAt": "2026-10-15T03:10:50.248Z",
+      "updatedAt": "2026-10-15T03:10:50.248Z"
+    },
+    "design-artifact": {
+      "source": "plannotator/effective-html",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/plannotator/effective-html.git",
+      "skillPath": "skills/design-artifact/SKILL.md",
+      "skillFolderHash": "1697df691845b2ea8e78246df70052f9baf8d511",
+      "pluginName": "plannotator-effective-html",
+      "installedAt": "2026-10-15T03:11:31.456Z",
+      "updatedAt": "2026-10-15T03:11:31.456Z"
+    },
+    "html": {
+      "source": "plannotator/effective-html",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/plannotator/effective-html.git",
+      "skillPath": "skills/html/SKILL.md",
+      "skillFolderHash": "926c2a2bda2e983c51124c4232e8562ac281dc06",
+      "pluginName": "plannotator-effective-html",
+      "installedAt": "2026-10-15T03:11:31.458Z",
+      "updatedAt": "2026-10-15T03:11:31.458Z"
+    },
+    "ian-xiaohei-illustrations": {
+      "source": "helloianneo/ian-xiaohei-illustrations",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/helloianneo/ian-xiaohei-illustrations.git",
+      "skillPath": "ian-xiaohei-illustrations/SKILL.md",
+      "skillFolderHash": "2f14547edb8b77d40e4e404eb8e9f851409b9f42",
+      "installedAt": "2026-10-15T03:11:36.404Z",
+      "updatedAt": "2026-10-15T03:11:36.404Z"
     }
   },
   "dismissed": {
