@@ -2,7 +2,7 @@
 name: onboarding
 description: When the user wants to optimize post-signup onboarding, user activation, first-run experience, or time-to-value. Also use when the user mentions "onboarding flow," "activation rate," "user activation," "first-run experience," "empty states," "onboarding checklist," "aha moment," "new user experience," "users aren't activating," "nobody completes setup," "low activation rate," "users sign up but don't use the product," "time to value," or "first session experience." Use this whenever users are signing up but not sticking around. For signup/registration optimization, see signup. For ongoing email sequences, see emails.
 metadata:
-  version: 2.0.1
+  version: 2.0.2
 ---
 
 # Onboarding CRO
@@ -75,9 +75,15 @@ Choose an **activation model** (freemium, free trial, paid trial, money-back, co
 
 ### Find Your Aha Moment
 
-The action that correlates most strongly with retention:
-- What do retained users do that churned users don't?
-- What's the earliest indicator of future engagement?
+Find early value actions associated with later retention, using a defined cohort and timeline:
+
+1. Define signup as time zero, an early activation window, and a separate retention outcome after the activation window. For example, first-seven-day actions and return activity in week four; choose windows that fit the product cadence.
+2. Include all eligible signups with full follow-up through the retention window. Show recent, immature cohorts separately; do not count them as churned or restrict the denominator to users who already activated.
+3. Compare actions recorded within the early window. Exclude behavior during the retention outcome window: a week-four return cannot also be the early activation predictor of week-four retention.
+4. Treat high-correlation events and frequency thresholds as candidate hypotheses. Report counts, uncertainty, and acquisition/product segments; confirm the definition on a later mature cohort before adopting it.
+5. Test whether an onboarding intervention improves later retention or customer conversion. Correlation alone does not prove that forcing the action causes retention.
+
+[Amplitude's Compass setup](https://amplitude.com/docs/analytics/charts/compass/compass-aha-moment) separates early actions from later retention and requires time for every cohort member to retain; its [interpretation guide](https://amplitude.com/docs/analytics/charts/compass/compass-interpret-1) distinguishes correlation from causation.
 
 **Examples by product type:**
 - Project management: Create first project + add team member
@@ -245,7 +251,7 @@ When recommending experiments, consider tests for:
 
 ## Task-Specific Questions
 
-1. What action most correlates with retention?
+1. Which early action predicts later retention, using what activation window and fully observed signup cohort?
 2. What happens immediately after signup?
 3. Where do users currently drop off?
 4. What's your activation rate target?

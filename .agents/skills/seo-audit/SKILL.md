@@ -2,7 +2,7 @@
 name: seo-audit
 description: When the user wants to audit, review, or diagnose SEO issues on their site. Also use when the user mentions "SEO audit," "technical SEO," "why am I not ranking," "SEO issues," "on-page SEO," "meta tags review," "SEO health check," "my traffic dropped," "lost rankings," "not showing up in Google," "site isn't ranking," "Google update hit me," "page speed," "core web vitals," "crawl errors," "indexing issues," "stuck on page 2," "striking distance keywords," "title tag rewrite," "low CTR," "local SEO," "Google Business Profile," or "map pack." Use this even if the user just says something vague like "my SEO is bad" or "help with SEO" — start with an audit. For building pages at scale to target keywords, see programmatic-seo. For adding structured data, see schema. For AI search optimization, see ai-seo.
 metadata:
-  version: 2.2.0
+  version: 2.2.1
 ---
 
 # SEO Audit
@@ -171,11 +171,11 @@ Three equivalent placement methods: HTML `<link>` in `<head>`, HTTP `Link` heade
 - Self-referencing entry on every page (page must include itself in the hreflang set)
 - Reciprocal links (if A points to B, B must point back to A -- or both are ignored)
 - Valid codes: ISO 639-1 language + optional ISO 3166-1 Alpha 2 region (e.g., `en`, `en-GB` -- never `en-UK`)
-- `x-default` present, pointing to fallback page (language selector or default locale)
+- Consider `x-default` for unmatched language/region users, pointing to an appropriate fallback; it is recommended, not required for other valid annotations.
 - All target URLs return 200, are indexable, and match their canonical URL
 - No duplicate language-region codes pointing to different URLs
 
-**Common errors:** Missing self-referencing entry (all hreflang ignored). No return tag / one-directional (pair dropped). Invalid codes like `en-UK` (use `en-GB`). Hreflang target is non-canonical, 404, or blocked (cluster discarded). HTML and sitemap annotations disagree (conflicting pair dropped).
+**Common errors:** Missing self-referencing entries. No return tag / one-directional links. Invalid codes like `en-UK` (use `en-GB`). Non-canonical, 404, or blocked targets. Conflicting HTML and sitemap annotations. Report the affected URLs and relationships; do not infer that one broken annotation invalidates every other reciprocal pair. Google can still process valid bidirectional relationships. See [Google's localized-page guidance](https://developers.google.com/search/docs/specialty/international/localized-versions#guidelines-for-all-methods).
 
 **At scale:** `<xhtml:link>` children don't count toward 50K URL sitemap limit, but the 50MB file size limit becomes the bottleneck (plan 2K-5K URLs per file with full hreflang). Focus hreflang on pages receiving wrong-language traffic -- not required on every page. For Bing: supplement with `<html lang>` and `<meta http-equiv="content-language">` (Bing treats hreflang as a weak signal).
 
@@ -194,7 +194,7 @@ Three equivalent placement methods: HTML `<link>` in `<head>`, HTTP `Link` heade
 
 **Check for:**
 - `xmlns:xhtml` namespace on `<urlset>`, each `<url>` includes `<xhtml:link>` for all locales including itself
-- `x-default` alternate included; all URLs absolute (full protocol + domain)
+- If a fallback is needed, include an appropriate `x-default` alternate; all URLs absolute (full protocol + domain)
 - Sitemap index in Search Console and robots.txt; split by content type, not by locale
 
 **Next.js caveat:** `alternates.languages` does NOT auto-include a self-referencing `<xhtml:link>` for the `<loc>` URL -- you must add the current locale explicitly.
@@ -398,7 +398,7 @@ Three equivalent placement methods: HTML `<link>` in `<head>`, HTTP `Link` heade
 - Canonical conflicting with hreflang (cross-locale canonical suppresses indexing)
 - Thin locale pages dragging down site-wide quality signal
 - Only boilerplate translated, main content identical across locales
-- No x-default fallback declared
+- Unmatched locale users lack an intentional fallback (consider `x-default`; absence alone is not invalid hreflang)
 - Sitemap missing hreflang alternates or missing reciprocal entries
 - IP-based redirects hiding content from Googlebot
 - Framework locale mode hiding locale from URLs

@@ -97,7 +97,13 @@ Reference for calculating sample sizes and test duration.
 
 ```
 Duration (days) = (Sample per variant × Number of variants) / (Daily traffic × % exposed)
+
+For unequal allocation, calculate each arm separately:
+Days per arm = Required sample for that arm / (Daily eligible traffic × Exposure fraction × Arm allocation fraction)
+Total collection time = longest arm duration
 ```
+
+Use fractions for exposure and allocation (50% = 0.5). Count eligible randomized units consistently with the sample-size calculation; repeat pageviews are not additional participants. The balanced formula assumes equal sample requirements and equal allocation.
 
 ### Examples
 
@@ -249,15 +255,22 @@ Statistical method that adjusts for multiple looks at data.
 ### Can I run this test?
 
 ```
-Daily traffic to page: _____
+Daily eligible traffic (randomization units): _____
+Fraction exposed to the experiment: _____
+Number of arms (including control): _____
+Allocation fraction for each arm: _____
 Baseline conversion rate: _____
 MDE I care about: _____
 
 Sample needed per variant: _____ (from tables above)
-Days to run: Sample / Daily traffic = _____
+Balanced allocation: Days = Sample per arm × Number of arms / (Daily eligible traffic × Exposure fraction)
+Unequal allocation: Days = max across arms of [Sample required for arm / (Daily eligible traffic × Exposure fraction × Arm allocation)]
+Round collection time up, then apply the minimum-duration rules above.
 
 If days > 60: Consider alternatives
 If days > 30: Acceptable for high-impact tests
 If days < 14: Likely feasible
 If days < 7: Easy to run, consider running longer anyway
 ```
+
+**Duration check (illustrative):** with 2,000 participants required per arm and 1,000 eligible participants/day, two arms at 50/50 with full exposure require four days, not two. At 50% exposure they require eight days. With full exposure and 90/10 allocation, the smaller arm needs 20 days to reach 2,000. These are collection estimates; honor planned business cycles and the analysis stopping rule.

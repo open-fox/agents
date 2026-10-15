@@ -2,7 +2,7 @@
 name: ads
 description: "When the user wants help with paid advertising campaigns on Google Ads, Meta (Facebook/Instagram), LinkedIn, Twitter/X, or other ad platforms. Also use when the user mentions 'PPC,' 'paid media,' 'ROAS,' 'CPA,' 'ad campaign,' 'retargeting,' 'audience targeting,' 'Google Ads,' 'Facebook ads,' 'LinkedIn ads,' 'ad budget,' 'cost per click,' 'ad spend,' 'should I run ads,' 'ABM,' 'account-based marketing,' 'B2B ads,' 'lead quality,' 'negative keywords,' 'Performance Max,' 'thought leader ads,' 'when should I kill an ad,' 'search terms report,' 'wasted spend,' or 'is this campaign working.' Use this for campaign strategy, audience targeting, bidding, and optimization. For bulk ad creative generation and iteration, see ad-creative. For landing page optimization, see cro. For outbound to target accounts, see cold-email."
 metadata:
-  version: 2.4.6
+  version: 2.5.0
 ---
 
 # Paid Ads
@@ -178,7 +178,7 @@ Trying to make up for weak creative with hyper-precise targeting. If your creati
 
 ## Modern Meta playbook (Andromeda era — 2026+)
 
-Meta's Andromeda algorithm (2025) made creative volume and variety the main lever: target broadly and let specific creative do the targeting, ship many cheap static concepts, and make ads look native rather than polished. The full playbook (creative volume, creative as targeting, identity keywords, AI variants, zombie campaigns, native-looking ads) is in [references/meta-andromeda-playbook.md](references/meta-andromeda-playbook.md).
+Meta's Andromeda algorithm (2025) made creative volume and variety the main lever: target broadly and let specific creative do the targeting, ship many cheap static concepts, and make ads look native rather than polished. The full playbook (creative volume, creative as targeting, identity keywords, AI variants, zombie campaigns, native-looking ads, and running creator ads as distinct concepts with a quality optimization event) is in [references/meta-andromeda-playbook.md](references/meta-andromeda-playbook.md).
 
 ---
 
@@ -304,16 +304,20 @@ Ad-to-landing-page congruence is the single most underrated lever in paid ads. M
 
 ### Headline mirroring
 
-Meta is the best split-testing tool that exists — your ad headlines are exposed to ~1000x the audience that actually clicks through to your landing page. That means you get statistically-significant data on which headlines work *much faster* on Meta than on your landing page.
+Ad headlines can help identify promising language for a landing page. More impressions do not automatically produce a reliable landing-page conversion estimate: repeated impressions are not independent users, clicks are a different outcome from purchases, and optimized ad delivery can expose variants to different audiences.
 
 The play:
 
-1. Run **20-40 different headlines** as ad variations
-2. Identify the best-performing headline (by CTR + downstream conversion)
-3. **Mirror that winning headline on your landing page** — exact wording in the H1, sub-headline, and lead-in copy of the body
-4. Expect a **15-20% minimum lift** in landing-page conversion rate from this single change
+Use Meta to screen headlines fast, then prove the winner on the page:
 
-This works because the viewer who clicked is expecting *that specific promise*. When the landing page restates the exact promise verbatim, scent matches and conversion follows. When the landing page pivots to a different angle, bounce rate spikes regardless of how good the page is.
+1. Screen a manageable set of headline hypotheses with enough traffic for each. Compare CTR alongside qualified conversions, cost, and sample sizes; a high-CTR headline can attract visitors who do not buy.
+2. Treat the apparent winner as a candidate. Ordinary ad variations with optimized delivery are exploratory; use an appropriate randomized ad experiment for a causal ad comparison. Account for multiple comparisons when screening many variants.
+3. Mirror the candidate's promise in a truthful landing-page variant, then run a fresh randomized landing-page test against the unchanged landing page. Keep incoming ads and traffic allocation consistent across page variants; predefine the primary conversion metric, guardrails, sample size, and stopping rule (see `ab-testing`).
+4. Report the observed effect and uncertainty. There is no guaranteed minimum conversion lift; keep the original page when evidence does not justify replacing it.
+
+Message continuity is a useful hypothesis, but an ad result does not establish the effect of changing the page. Confirm it with new visitors rather than reusing the screening result as proof.
+
+References: [Meta's About A/B Testing](https://www.facebook.com/business/help/1738164643098669) explains randomized, comparable exposure for ad tests. For page-test design and stopping rules, see the ab-testing skill.
 
 ### Three split tests minimum at all times
 

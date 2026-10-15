@@ -64,6 +64,16 @@ Detailed reference for creating short-form video content on TikTok, Instagram Re
 - "I'm going to get hate for this, but..."
 - "Most [audience] get this completely wrong"
 
+### Contrast Hooks (Best for educational content and decisions)
+
+- "Should you [option A] or [option B]?"
+- "We used to [old way]. Now everyone [new way]. Which one actually works?"
+- "Most [audience] do [X]. The ones who [result] do [Y]."
+- "You can cancel [thing they think they need]." (challenges a false assumption)
+- "You need [common belief]. Or do you?"
+
+Both sides of the contrast must be real options the viewer weighs, and the video has to pick one. See the ad-creative skill's hook system for when each works.
+
 ---
 
 ## Scripting Template

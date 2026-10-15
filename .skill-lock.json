@@ -96,9 +96,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/coreyhaines31/marketingskills.git",
       "skillPath": "skills/seo-audit/SKILL.md",
-      "skillFolderHash": "7aa1a3602b909a511c92516da3d7d4d2b9c89159",
+      "skillFolderHash": "882cc96732fa55143b6edc4751aff297f976c145",
       "installedAt": "2026-04-02T14:21:56.370Z",
-      "updatedAt": "2026-10-12T06:48:19.784Z"
+      "updatedAt": "2026-10-15T02:49:01.738Z"
     },
     "firecrawl": {
       "source": "firecrawl/cli",
@@ -141,18 +141,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/cloudflare/skills.git",
       "skillPath": "skills/cloudflare/SKILL.md",
-      "skillFolderHash": "1a76daddc33b559e0a94f6fa2c16c7a582e86aa6",
+      "skillFolderHash": "911851f7f4ed343a6e179e0f379c8688e4bcd59a",
       "installedAt": "2026-05-28T11:49:26.966Z",
-      "updatedAt": "2026-10-12T06:48:25.073Z"
+      "updatedAt": "2026-10-15T02:49:05.200Z"
     },
     "cloudflare-email-service": {
       "source": "cloudflare/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/cloudflare/skills.git",
       "skillPath": "skills/cloudflare-email-service/SKILL.md",
-      "skillFolderHash": "8206f3fa7266dc1d9868680643da217705328ac0",
+      "skillFolderHash": "71a7107b1e2046e1d6a3c9998997bd51c93872bb",
       "installedAt": "2026-05-28T11:49:26.967Z",
-      "updatedAt": "2026-10-08T07:40:23.255Z"
+      "updatedAt": "2026-10-15T02:49:07.317Z"
     },
     "durable-objects": {
       "source": "cloudflare/skills",
@@ -177,18 +177,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/cloudflare/skills.git",
       "skillPath": "skills/workers-best-practices/SKILL.md",
-      "skillFolderHash": "46b2eac6a1a81c6bfbc01164f93f0432ee3d9751",
+      "skillFolderHash": "60b76163741cb3464f710138ee2023e06403aaa5",
       "installedAt": "2026-05-28T11:49:26.970Z",
-      "updatedAt": "2026-10-08T07:40:30.171Z"
+      "updatedAt": "2026-10-15T02:49:09.201Z"
     },
     "wrangler": {
       "source": "cloudflare/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/cloudflare/skills.git",
       "skillPath": "skills/wrangler/SKILL.md",
-      "skillFolderHash": "2dab1373cf45bcde6db84354711b7406127a239a",
+      "skillFolderHash": "a6f70b001b36794b778ed888fc372df40d59e6ca",
       "installedAt": "2026-05-28T11:49:26.971Z",
-      "updatedAt": "2026-10-08T07:40:32.910Z"
+      "updatedAt": "2026-10-15T02:49:11.038Z"
     },
     "ip-as-logo": {
       "source": "s1dashu/ip-as-logo-skill",
@@ -297,16 +297,6 @@
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/engineering/research/SKILL.md",
       "skillFolderHash": "0a6796c5667e95ed2301ba7381c123b4acb2ae1a",
-      "pluginName": "mattpocock-skills",
-      "installedAt": "2026-08-22T10:44:39.603Z",
-      "updatedAt": "2026-08-22T10:44:39.603Z"
-    },
-    "resolving-merge-conflicts": {
-      "source": "mattpocock/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/mattpocock/skills.git",
-      "skillPath": "skills/engineering/resolving-merge-conflicts/SKILL.md",
-      "skillFolderHash": "77f0d7de3143abbf03e55a63522d30bff31ae908",
       "pluginName": "mattpocock-skills",
       "installedAt": "2026-08-22T10:44:39.603Z",
       "updatedAt": "2026-08-22T10:44:39.603Z"
@@ -563,9 +553,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/tt-a1i/archify.git",
       "skillPath": "archify/SKILL.md",
-      "skillFolderHash": "a38bc1bc9e97804aa5d23f09c357ac23e096eb54",
+      "skillFolderHash": "7e1de2b2cf3a9a91823ee5dcc2089c1d96a7e4f1",
       "installedAt": "2026-10-12T02:23:20.870Z",
-      "updatedAt": "2026-10-12T02:23:20.870Z"
+      "updatedAt": "2026-10-15T02:49:19.436Z"
     },
     "reverse-engineer-anything": {
       "source": "shijianzhong/rea",
@@ -581,9 +571,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/danyuchn/asd-ste100-skill.git",
       "skillPath": "SKILL.md",
-      "skillFolderHash": "32511c6992ecb5f1971e46a2943f2e6adceedafe",
+      "skillFolderHash": "3944283c183eea13fe5bd902b572da3b4de8bf44",
       "installedAt": "2026-10-12T06:45:55.614Z",
-      "updatedAt": "2026-10-12T06:45:55.614Z"
+      "updatedAt": "2026-10-15T02:49:21.336Z"
     }
   },
   "dismissed": {

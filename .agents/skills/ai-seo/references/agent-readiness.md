@@ -48,6 +48,8 @@ Practical today: make sure your highest-intent actions (signup, pricing, demo bo
 
 Whichever path, test that each tool rejects bad input, that submissions land where the normal form's do (CRM, inbox, conversion tracking), and that nothing bypasses consent or rate limits.
 
+For products an agent installs mid-task (developer tools, APIs, infrastructure), the next step past acting on your site is being the vendor the agent picks in the first place. See [agent-defaults.md](agent-defaults.md).
+
 ## Citation-source volatility (why you diversify)
 
 Third-party citation mixes are **not stable** — they shift overnight with model and retrieval updates, and August 2026 provided the case study: **ChatGPT's query fan-out changes nearly wiped Reddit as a citation source** within days (practitioner-reported by multiple AEO teams; one had been earning 24-hour citations from Reddit at 1M+ impressions/month before the change). Meanwhile the same practitioners report **business-owned websites dominate Gemini citations (~60%)**.

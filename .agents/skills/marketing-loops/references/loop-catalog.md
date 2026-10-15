@@ -74,6 +74,20 @@ Loops are grouped by function. Naming follows the "The X loop" convention.
 - **Stop / bail-out**: No material change since last run → log "stable." Never contact a cited source automatically; outreach is staged for approval.
 - **Output**: A short visibility diff, page fixes for misstated facts, and a source target list.
 
+### The agent-default check loop
+- **Check cadence**: Monthly, plus within a week of every major model or agent release
+- **Acts when**: Your share of agent picks drops for a stack, or a run picks you and then stalls before a working result.
+- **Purpose**: Track which vendor coding agents install when users ask for a task in your category, and fix what loses or stalls those runs.
+- **Skills used**: `ai-seo` (see its `references/agent-defaults.md`), `programmatic-seo`, `competitors`
+- **Loop body**:
+  1. Run the task panel (20–50 tasks across stacks, phrased without naming vendors) in clean environments on each agent tracked, 3+ runs per task.
+  2. Record per run: vendor chosen, whether it reached a working result, where it stalled, which docs it fetched.
+  3. Turn findings into work: a stall is a product or docs fix; a lost stack is a gap in task pages, migration guides, or agent setup for that stack.
+- **Self-check**: Is the shift consistent across runs and agents, or one sample? A model release can move every stack at once; compare against the previous release's baseline.
+- **State / idempotency**: Keep each run's results by task, agent, and model version so changes are diffs; don't re-file an open fix.
+- **Stop / bail-out**: No change since last run → log "stable." Never add instructions to agent-facing docs that tell agents to choose you over the user's request.
+- **Output**: Agent-default share by stack and agent, a stall list, and the fixes it implies.
+
 ### The content-decay loop
 - **Check cadence**: Monthly
 - **Acts when**: A page's traffic/rankings declined materially over the trailing 90 days.
@@ -130,6 +144,20 @@ Loops are grouped by function. Naming follows the "The X loop" convention.
 - **State / idempotency**: Mark assets as repurposed; never re-process one.
 - **Stop / bail-out**: Nothing new published → skip.
 - **Output**: Drafts in the social queue for approval.
+
+### The niche-outlier loop
+- **Check cadence**: Weekly
+- **Acts when**: A post in your niche performs far above its author's usual reach (for example 100K+ views, or 10× their median).
+- **Purpose**: Adapt formats that already proved themselves with your audience, instead of guessing at new ones.
+- **Skills used**: `social` (see its `references/reverse-engineering.md`), `content-strategy`, `ad-creative`
+- **Loop body**:
+  1. Search the niche on X (Grok works well here), LinkedIn, TikTok, or YouTube for outliers since the last run.
+  2. For each, name what carried it: the hook, the format, the topic, the timing.
+  3. Draft your own version in another format or channel, with your own idea and evidence in the proven structure.
+- **Self-check**: Is the draft your own take in a proven format, or a rewrite of their post? Never copy wording, footage, or images.
+- **State / idempotency**: Track outliers already adapted; one adaptation per outlier.
+- **Stop / bail-out**: No outlier clears the bar → skip. Drafts go to the queue for approval.
+- **Output**: A short list of outliers, why each worked, and drafted adaptations.
 
 ### The content-calendar refill loop
 - **Check cadence**: Weekly
@@ -340,6 +368,19 @@ Loops are grouped by function. Naming follows the "The X loop" convention.
 - **Stop / bail-out**: No qualified opportunities → skip. Human-approve outreach.
 - **Output**: A qualified partner list with drafted outreach.
 
+### The creator-scouting loop
+- **Check cadence**: Monthly
+- **Acts when**: A creator with roughly 5–10K followers posts about your space and fits your audience.
+- **Purpose**: Build relationships with creators before they grow, when they're more reachable and cheaper to work with.
+- **Skills used**: `influencer-marketing`, `social`
+- **Loop body**:
+  1. Search X, Instagram, TikTok, LinkedIn, and YouTube for small accounts already posting about the problem you solve.
+  2. Vet with the influencer-marketing skill's audience-alignment test and fake-follower checks.
+  3. Add qualified creators to a watchlist; draft a first touch (a genuine reply, a product invite) for the best fits.
+- **Self-check**: Is their audience your buyer, or just adjacent? Reach without fit doesn't count.
+- **State / idempotency**: Track every creator scouted, contacted, and declined; never re-pitch inside the cooldown.
+- **Stop / bail-out**: No qualified creators → skip. Human-approve all outreach.
+- **Output**: A creator watchlist with notes and drafted first touches.
 ---
 
 ## Outbound
@@ -789,6 +830,19 @@ Loops are grouped by function. Naming follows the "The X loop" convention.
 - **Stop / bail-out**: No concluded campaign → skip.
 - **Output**: A postmortem doc + backlog/plan inputs.
 
+### The launch-reaction loop
+- **Check cadence**: Hourly to every few hours for the first 24 hours after a launch (event-based)
+- **Acts when**: A launch, pricing change, or major announcement goes live.
+- **Purpose**: Hear how people actually react while there's still time to adjust messaging, answer questions, and fix confusion.
+- **Skills used**: `social` (see its `references/listening.md`), `launch`, `copywriting`
+- **Loop body**:
+  1. Pull posts, replies, and threads about the launch across X (Grok can search it directly), LinkedIn, Reddit, Hacker News, and Product Hunt.
+  2. Group reactions: praise, confusion, objections, bugs, pricing pushback.
+  3. Draft replies and messaging fixes (a clearer headline, an FAQ entry) for the top themes; route bugs to the product team.
+- **Self-check**: Is a theme a pattern, or one loud thread? Weight by count and by who's saying it.
+- **State / idempotency**: One run log per launch; track threads already answered.
+- **Stop / bail-out**: Stops after 24 hours, then hands off to the campaign-postmortem loop. Escalate a crisis or a security report to a human immediately.
+- **Output**: A reaction digest with themes, drafted replies, and messaging fixes.
 ---
 
 ## Adapting and authoring loops
