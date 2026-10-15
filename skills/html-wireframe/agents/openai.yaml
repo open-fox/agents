@@ -1,0 +1,7 @@
+interface:
+  display_name: "HTML Wireframe"
+  short_description: "Direct skill for low-fidelity HTML layouts"
+  default_prompt: "Use $html-wireframe to explore low-fidelity layouts for this product brief."
+
+policy:
+  allow_implicit_invocation: false
