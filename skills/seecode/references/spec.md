@@ -1,0 +1,31 @@
+# Spec envelope and patching
+
+**Shared fields (every type)**
+- `type` (required).
+- `title`, `subtitle`, `eyebrow` (`""` hides it), `caption`.
+- `motion`: `auto` | `none` | `reveal` | `trace` | `step` | `loop`.
+- `order`: ids, to script the motion sequence.
+- `skin`: `light` | `dark` | `terminal`. The page has its own light/dark toggle.
+- `size`: `auto` | `wide` | `slide` | `square`.
+- `budget`: `strict` | `balanced` (default) | `faithful` (imports, up to 24 nodes) | `off`.
+- `lang`: the language of the labels (`"zh-CN"`, `"ja"`, `"ar"`…), default `en`. Sets the page language for screen readers and font shaping; right-to-left languages flip the page controls (the diagram keeps its layout). Chinese, Japanese and Korean labels wrap between characters.
+- `legend`: `false` hides it, `true` forces it. Rename or hide entries, and retitle it, with an object: `{"title":"Key","entries":{"backend":{"label":"Holiday"},"async":{"label":"Reminder"},"store":{"visible":false}}}`. Keys are node kinds, edge kinds, statuses, changes or series names; an unknown key gives `W_LEGEND_KEY` listing the valid ones. The viewer's Lens menu and detail panel use the same names.
+- `evidence`: `[{id,file,line?,note?}]`.
+
+**Node icons** (graph types, sequence participants, tree nodes): `"icon": "calendar"` draws a small line icon left of the label on box, state, terminal and io shapes. Decorative only; it never changes kind or colour. Good for everyday diagrams. Names: `calendar`, `clock`, `person`, `people`, `briefcase`, `home`, `money`, `card`, `cart`, `document`, `flag`, `check`, `mail`, `phone`, `chat`, `plane`, `car`, `heart`, `star`, `moon`, `sun`, `gift`, `pin`, `key`, `server`, `database`, `cloud`, `lock`, `code`, `gear`.
+
+- `out`: the output path, relative to the spec.
+
+**Problems**: `{code,at,msg,fix}`.
+- `E_` blocks rendering.
+- `W_` renders, but should be fixed. `W_ROUTE_*` (stacked, crowded, border-riding or diagonal connectors) is fixed by moving a node one row/col, as its `fix` says.
+- `I_` is optional.
+
+**Patch** (`--patch '<json>'`; the patch is merged into the spec file and saved):
+- Objects merge, and `null` deletes a field.
+- Arrays of objects with `id` patch by id: `{"nodes":{"api":{"row":2},"old":null,"new":{"label":"New","row":0,"col":4}}}`.
+- Tuple arrays add or remove items: `{"edges":{"add":[["a","b","label"]],"remove":["c>d"]}}`. `remove` also accepts indexes.
+
+**Fonts:** `"fonts": "system"` leaves the Google Fonts stylesheet out of the page, so it makes no font request and shows system fonts. Use it when the user asks for a diagram without external requests; the `fonts` setting does the same for every diagram.
+
+**Watermark:** every diagram carries the SeeCode logo in its bottom-right corner, in all formats. The lettering takes the diagram's text colour, so it stays visible on any background. Keep it unless the user asks to remove it; then set `"watermark": false` in the spec, or `SC config set watermark false` for all diagrams.
