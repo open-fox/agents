@@ -1,8 +1,8 @@
 ---
 name: copy-editing
-description: "When the user wants to edit, review, or improve existing marketing copy, or refresh outdated content. Also use when the user mentions 'edit this copy,' 'review my copy,' 'copy feedback,' 'proofread,' 'polish this,' 'make this better,' 'copy sweep,' 'tighten this up,' 'this reads awkwardly,' 'clean up this text,' 'too wordy,' 'sharpen the messaging,' 'refresh this content,' 'update this page,' 'this content is outdated,' or 'content audit,' 'this sounds like AI,' 'AI slop,' 'de-slop this,' or 'make it sound human.' Use this when the user already has copy and wants it improved or refreshed rather than rewritten from scratch. Every edit removes AI tells such as 'it's not X, it's Y' reveals, 'no X, no Y, no Z' lists, and sentences that trail into extra comma clauses. For writing new copy, see copywriting."
+description: "When the user wants to edit, review, or improve existing marketing copy, or refresh outdated content. Also use when the user mentions 'edit this copy,' 'review my copy,' 'copy feedback,' 'proofread,' 'polish this,' 'make this better,' 'copy sweep,' 'tighten this up,' 'this reads awkwardly,' 'clean up this text,' 'too wordy,' 'sharpen the messaging,' 'refresh this content,' 'update this page,' 'this content is outdated,' or 'content audit,' 'this sounds like AI,' 'AI slop,' 'de-slop this,' or 'make it sound human.' Use this when the user already has copy and wants it improved or refreshed rather than rewritten from scratch. Every edit removes AI tells such as 'it's not X, it's Y' reveals, 'no X, no Y, no Z' lists, and sentences that trail into extra comma clauses. A request to fix one line gets a point edit that changes only that line. For writing new copy, see copywriting."
 metadata:
-  version: 2.1.1
+  version: 2.2.0
 ---
 
 # Copy Editing
@@ -21,6 +21,8 @@ Good copy editing improves what's already there. Each pass focuses on one dimens
 - Multiple focused passes beat one unfocused review
 - Each edit should have a clear reason
 - Preserve the author's voice while improving clarity
+
+**Pick the mode before editing.** Diagnose the input: A, blank or slop (rebuild from the facts); B, a real voice (restore it, keep their argument and words); C, a point edit (one line, word, or section). **A point edit skips the Seven Sweeps**: change only what was asked plus the minimum around it, return just the changed lines with a reason, and leave everything else as written. Run the full sweeps for A and B. See [references/checklist.md](references/checklist.md#pick-the-edit-mode).
 
 ---
 

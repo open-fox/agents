@@ -187,6 +187,19 @@
         "Uses cumulative cohort gross profit with explicit monthly assumptions"
       ],
       "files": []
+    },
+    {
+      "id": 15,
+      "prompt": "Weekly check on our Google Ads lead-gen account. This week vs last: spend $8,400 vs $8,100, clicks flat, CPA up from $140 to $210. Google Ads shows 40 conversions, but the CRM only logged 22 new leads from paid search, and last week the two matched. Someone changed the thank-you page on Tuesday. I don't have the change history export. What should we do with the budget?",
+      "expected_output": "Should run the ordered check (spend, traffic, conversions, creative, landing page, tracking) and land on exactly one call: INVESTIGATE, because platform and CRM conversion counts diverged after a thank-you page change, so the CPA can't be trusted. Should not recommend a budget, bid, or pause change until tracking is verified. Should name the likely cause (duplicate or misfiring conversion tag after the page change) as a hypothesis, mark the change history as MISSING, and end with facts, hypotheses, and missing data.",
+      "assertions": [
+        "Ends in exactly one call, and that call is INVESTIGATE",
+        "Does not recommend changing budget, bids, or campaign status this week",
+        "Links the platform-vs-CRM divergence to the Tuesday thank-you page change as a hypothesis, not a fact",
+        "Labels the change history export as MISSING instead of assuming what changed",
+        "Ends with separate facts, hypotheses, and missing data lists"
+      ],
+      "files": []
     }
   ]
 }

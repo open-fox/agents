@@ -96,18 +96,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/coreyhaines31/marketingskills.git",
       "skillPath": "skills/seo-audit/SKILL.md",
-      "skillFolderHash": "882cc96732fa55143b6edc4751aff297f976c145",
+      "skillFolderHash": "dedc690c587c376951526c087a567f207c070595",
       "installedAt": "2026-04-02T14:21:56.370Z",
-      "updatedAt": "2026-10-15T02:49:01.738Z"
+      "updatedAt": "2026-10-21T03:48:31.501Z"
     },
     "firecrawl": {
       "source": "firecrawl/cli",
       "sourceType": "github",
       "sourceUrl": "https://github.com/firecrawl/cli.git",
       "skillPath": "skills/firecrawl/SKILL.md",
-      "skillFolderHash": "197b2b7f1f8be884d65a0142f3b4d25b31901efe",
+      "skillFolderHash": "5697a4beb4fd9b09224d2bdc896dedaaa1a96e99",
       "installedAt": "2026-04-02T14:25:18.505Z",
-      "updatedAt": "2026-10-12T06:48:21.701Z"
+      "updatedAt": "2026-10-21T03:48:33.541Z"
     },
     "editorial-card-screenshot": {
       "source": "shaom/infocard-skills",
@@ -141,9 +141,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/cloudflare/skills.git",
       "skillPath": "skills/cloudflare/SKILL.md",
-      "skillFolderHash": "911851f7f4ed343a6e179e0f379c8688e4bcd59a",
+      "skillFolderHash": "d964e627e14032b05351d06d7f06fed14362350e",
       "installedAt": "2026-05-28T11:49:26.966Z",
-      "updatedAt": "2026-10-15T02:49:05.200Z"
+      "updatedAt": "2026-10-21T03:48:36.118Z"
     },
     "cloudflare-email-service": {
       "source": "cloudflare/skills",
@@ -553,18 +553,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/tt-a1i/archify.git",
       "skillPath": "archify/SKILL.md",
-      "skillFolderHash": "7e1de2b2cf3a9a91823ee5dcc2089c1d96a7e4f1",
+      "skillFolderHash": "39069dd190f574064fe410aa3af1b6dfd98a522c",
       "installedAt": "2026-10-12T02:23:20.870Z",
-      "updatedAt": "2026-10-15T02:49:19.436Z"
+      "updatedAt": "2026-10-21T03:48:47.493Z"
     },
     "reverse-engineer-anything": {
       "source": "shijianzhong/rea",
       "sourceType": "github",
       "sourceUrl": "https://github.com/shijianzhong/rea.git",
-      "skillPath": "skills/reverse-engineer-anything/SKILL.md",
-      "skillFolderHash": "c76ed6e055853aef0129877cd27c465fe38da239",
+      "skillPath": ".agents/skills/reverse-engineer-anything/SKILL.md",
+      "skillFolderHash": "2b8c7885857168b4aedd5ba921a132bcea694f25",
       "installedAt": "2026-10-12T02:23:56.269Z",
-      "updatedAt": "2026-10-12T02:23:56.269Z"
+      "updatedAt": "2026-10-21T03:48:54.386Z"
     },
     "asd-ste100": {
       "source": "danyuchn/asd-ste100-skill",

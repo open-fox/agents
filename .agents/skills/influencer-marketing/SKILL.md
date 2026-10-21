@@ -1,8 +1,8 @@
 ---
 name: influencer-marketing
-description: "When the user wants to run influencer, creator, or ambassador partnerships to promote their product — finding and vetting partners, structuring deals, briefing creators, disclosure compliance, and measuring ROI. Also use when the user mentions 'influencer marketing,' 'creator partnerships,' 'sponsorships,' 'YouTube sponsorships,' 'podcast sponsorships,' 'brand ambassador,' 'ambassador program,' 'creator program,' 'UGC creators,' 'tech UGC,' 'UGC creator program,' 'creator network,' 'B2B influencers,' 'thought leader ads,' 'gifting,' 'product seeding,' 'whitelisting creator content,' 'Telegram channel ads,' 'buy a post in a Telegram channel,' 'how much to pay an influencer,' or 'FTC disclosure.' For affiliate/referral payout mechanics, see referrals. For community-led advocacy, see community-marketing. For turning creator content into paid ads, see ad-creative."
+description: "When the user wants to run influencer, creator, or ambassador partnerships to promote their product — finding and vetting partners, structuring deals, briefing creators, disclosure compliance, and measuring ROI. Also use when the user mentions 'influencer marketing,' 'creator partnerships,' 'sponsorships,' 'YouTube sponsorships,' 'podcast sponsorships,' 'newsletter sponsorship,' 'newsletter ad,' 'sponsor a newsletter,' 'brand ambassador,' 'ambassador program,' 'creator program,' 'UGC creators,' 'tech UGC,' 'UGC creator program,' 'creator network,' 'B2B influencers,' 'thought leader ads,' 'gifting,' 'product seeding,' 'whitelisting creator content,' 'Telegram channel ads,' 'buy a post in a Telegram channel,' 'how much to pay an influencer,' or 'FTC disclosure.' For affiliate/referral payout mechanics, see referrals. For community-led advocacy, see community-marketing. For turning creator content into paid ads, see ad-creative."
 metadata:
-  version: 1.3.0
+  version: 1.4.0
 ---
 
 # Influencer & Creator Marketing
@@ -34,6 +34,8 @@ The further right you go, the more it's about *relationship* than *transaction* 
 **One more model — the volume UGC creator program ("tech UGC"):** an in-house network of creators posting disclosed native short-form from dedicated brand-affiliated accounts at test volume (10 creators × 3 posts/day ≈ 900 organic tests/month). Content volume, not any creator's audience, is the asset. See [references/ugc-creator-program.md](references/ugc-creator-program.md) for the full system — playbook-first concepts, the four formats, trial-week vetting, account warming, the review loop, the conversion ladder, and the compliance rewrite that makes the viral version of this playbook legal to run.
 
 **And its paid-ads cousin — the performance-paid creator program:** creators make videos for your ad accounts and earn a share of the spend (or revenue) behind them, usually with a monthly minimum for hitting a video quota. A small, coached cohort (start at 4–5, cap around 40–60) beats hundreds of mercenary creators, because near-identical videos get clustered and suppressed on Meta. See [references/paid-ads-creator-program.md](references/paid-ads-creator-program.md) for rate-setting math, the guaranteed-minimum mechanic, recruiting, briefing, and keeping creators from copying the leaderboard.
+
+**Newsletter sponsorships** buy a placement in someone else's newsletter, with one tracked link per send. Before booking a newsletter again, read what its earlier placements did and skip angles run on that list in the last 30 days. See [references/newsletter-sponsorships.md](references/newsletter-sponsorships.md) for vetting, the past-results table, placement specs, writing to the list, and reporting.
 
 ## 1. Finding & Vetting Partners
 
@@ -128,7 +130,7 @@ Ground the talking points in real proof (reviews, results) — same grounding di
 Influencer marketing suffers from attribution gaps — fix them upfront, before the campaign runs:
 
 - **Unique promo codes** (e.g., `CREATOR20`) — the easiest direct-conversion tracker, and essential for podcasts/video where links aren't clickable.
-- **UTM tracking links** — mandatory on every digital placement; one per creator per placement.
+- **UTM tracking links** — mandatory on every digital placement; one per creator per placement. Use the fixed pattern for each partner type (newsletter, creator, podcast, affiliate, community) in **analytics** (UTM Patterns by Partner Type), so every deal rolls up the same way.
 - **Vanity / dedicated landing pages** — `yourdomain.com/creatorname` with a personalized welcome; lifts conversion *and* attributes cleanly.
 - **Post-purchase survey** — "How did you hear about us?" catches the halo/branded-search effect that promo codes and last-click miss (much of influencer impact shows up later as branded search and direct — see **attribution** for the blind-spot framework; **ai-seo** when the discovery path was AI search).
 - **Whitelisting performance** — when you repurpose creator content as ads, that ad's own metrics are a clean read on the creative's real pull.

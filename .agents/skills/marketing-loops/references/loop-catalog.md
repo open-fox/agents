@@ -74,6 +74,21 @@ Loops are grouped by function. Naming follows the "The X loop" convention.
 - **Stop / bail-out**: No material change since last run → log "stable." Never contact a cited source automatically; outreach is staged for approval.
 - **Output**: A short visibility diff, page fixes for misstated facts, and a source target list.
 
+### The AI-answer accuracy audit loop
+- **Check cadence**: Monthly, plus after any pricing, packaging, or major product change
+- **Acts when**: An AI answer states something about the brand that is false, stale, or missing a qualifier, especially price, compatibility, safety, or plan limits.
+- **Purpose**: Catch wrong claims AI assistants make about the product and fix the pages they're drawn from, before buyers act on them.
+- **Skills used**: `ai-seo`, `product-marketing`, `copy-editing`, `public-relations`
+- **Loop body**:
+  1. Run the accuracy prompts (questions about pricing, plans, integrations, limits, security, comparisons) on each assistant tracked, several runs each.
+  2. Log every factual claim about the brand with a verdict: accurate, accurate but incomplete, ambiguous, stale, false, subjective framing, or unverifiable.
+  3. For each wrong claim, trace the likely source: your own page, docs, an old review, a directory listing, a third-party article.
+  4. Stage the fix at the source, starting with pages you own: state the fact plainly, date it, and remove the old version. For third-party sources, stage a correction request.
+- **Self-check**: Is the error in most runs, or one? Rate severity before acting: a wrong price or a false compatibility claim is critical; a slightly dated feature list can wait.
+- **State / idempotency**: Keep a claims ledger (claim, verdict, source, fix status, date found) and diff each run against it; don't re-file a correction that's already open.
+- **Stop / bail-out**: No new or worsened errors → log "stable." Correction requests to third parties are staged for approval, never sent automatically.
+- **Output**: An accuracy ledger diff, ranked by severity, with source fixes staged.
+
 ### The agent-default check loop
 - **Check cadence**: Monthly, plus within a week of every major model or agent release
 - **Acts when**: Your share of agent picks drops for a stack, or a run picks you and then stalls before a working result.
@@ -176,6 +191,22 @@ Loops are grouped by function. Naming follows the "The X loop" convention.
 ---
 
 ## Paid
+
+### The weekly ads-check loop
+- **Check cadence**: Weekly (Monday), or daily on accounts spending enough to move in a day
+- **Acts when**: Spend, traffic, conversion, creative, landing page, or tracking metrics move past the account's thresholds versus the prior 7 days or the targets in the context doc.
+- **Purpose**: Make the weekly account review end in one decision per account.
+- **Skills used**: `ads`, `analytics`, `ad-creative`, `cro`
+- **Loop body**:
+  1. Read the **Paid Ads** section of `.agents/product-marketing.md` for targets, hard floors, and what counts as a conversion.
+  2. Check in a fixed order: spend and pacing → traffic (clicks, CPC, CTR, CPM, search terms) → conversions (CVR, CPA, ROAS, lead quality) → creative fatigue (frequency, CTR versus peak) → landing page (speed, forms, mobile CVR) → tracking (conversion counts against GA4 or the CRM).
+  3. For each mover, separate facts in the data from hypotheses, and list missing data.
+  4. End with exactly one call per account: **HOLD** (no change for now), **FIX** (a known, named issue), **TEST** (a hypothesis worth spend), or **INVESTIGATE** (the data can't be trusted yet).
+  5. On Friday, or at the end of the reporting period, turn the week's calls into a short stakeholder readout: results versus target, what moved and why, and next week's decisions.
+- **Self-check**: Does any recommendation rest on a number that's still inside its conversion lag or learning phase? If tracking disagrees with the CRM by more than the usual gap, the call is INVESTIGATE.
+- **State / idempotency**: Store each week's call per account and the issue it named; don't re-open a FIX that's already staged.
+- **Stop / bail-out**: Never change budgets, bids, campaign status, tracking, or live ads. Changes are staged as plans for approval. Halt and alert if spend passes its cap.
+- **Output**: One HOLD / FIX / TEST / INVESTIGATE call per account with facts, hypotheses, and missing data, plus the weekly readout.
 
 ### The ad-fatigue loop
 - **Check cadence**: Every 2–3 days
@@ -329,16 +360,16 @@ Loops are grouped by function. Naming follows the "The X loop" convention.
 ### The backlink-prospecting loop
 - **Check cadence**: Weekly
 - **Acts when**: New relevant link/guest-post/mention targets appear (or the pipeline is thin).
-- **Purpose**: Keep a steady flow of link-building and earned-mention opportunities.
-- **Skills used**: `public-relations`, `seo-audit`
+- **Purpose**: Keep a steady flow of link-building and earned-mention opportunities aimed at the pages that need authority.
+- **Skills used**: `link-building`, `public-relations`, `seo-audit`
 - **Loop body**:
-  1. Find new prospects: sites linking to competitors, relevant roundups, unlinked brand mentions, resource pages.
-  2. Qualify by relevance + authority.
-  3. Draft outreach angles for the top targets.
-- **Self-check**: Is the target genuinely relevant, or a low-quality link that could hurt? Skip spammy sites.
-- **State / idempotency**: Track already-contacted targets + outcomes; respect a follow-up cadence, don't re-pitch cold.
+  1. Find new prospects: sites linking to two or more competitors' ranking pages, unlinked brand mentions, the third-party pages AI engines cite for the target prompts, resource pages, and broken links to dead resources.
+  2. Qualify by relevance, legitimacy, and value to a target page (checks in `link-building`'s prospecting reference).
+  3. Draft outreach for the top targets, one ask each.
+- **Self-check**: Is the target genuinely relevant, or a low-quality link that could hurt? Skip spammy sites, and never propose paying for a followed link.
+- **State / idempotency**: The outreach tracker is the state: skip anyone already contacted, respect a single follow-up, don't re-pitch cold.
 - **Stop / bail-out**: No qualified new targets → skip. Human-approve outreach sends.
-- **Output**: A qualified prospect list with drafted outreach.
+- **Output**: A qualified prospect list with drafted outreach, plus placements won since the last run.
 
 ### The directory-submission loop
 - **Check cadence**: Monthly
@@ -820,11 +851,12 @@ Loops are grouped by function. Naming follows the "The X loop" convention.
 - **Check cadence**: On campaign end (event-based)
 - **Acts when**: A campaign (launch, promo, seasonal push) concludes.
 - **Purpose**: Capture results, lessons, and reusable assets so each campaign compounds.
-- **Skills used**: `analytics`, `marketing-plan`
+- **Skills used**: `analytics`, `marketing-plan`, `product-marketing`
 - **Loop body**:
   1. Pull final campaign results vs. goals.
   2. Capture what worked, what didn't, and why; save reusable assets (copy, creative, workflows).
   3. Feed learnings into the experiment backlog and the next plan; log follow-ups.
+  4. Propose the lessons that should change future work as rows for the **Learnings** table in the product-marketing context doc (see `loop-state.md`).
 - **Self-check**: Are conclusions supported by the data, or hindsight narrative? Separate correlation from cause.
 - **State / idempotency**: One postmortem per campaign; don't re-run on an already-documented campaign.
 - **Stop / bail-out**: No concluded campaign → skip.

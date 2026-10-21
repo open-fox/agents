@@ -35,9 +35,45 @@ Where the agent stalled tells you more than which vendor it picked. A run that c
 
 Fix the stall points from your measurement first. Content won't help if the agent picks you and then can't finish.
 
+## Audit your docs for coding agents
+
+Treat a coding agent as its own answer engine. In Profound's sample of 24,135 responses with web search enabled, Claude searched the web in 93% of responses and Claude Code in 13%, and the brands each one mentioned overlapped only about 20% (Profound, August 2026; observational). When Claude Code did fetch pages, nearly three-quarters of visits went to documentation, informational, and pricing pages. So your chat-assistant visibility tells you little about your coding-agent visibility, and the pages agents read are docs and pricing.
+
+Profound sells AI visibility tracking; treat these as vendor research and run your own panel (above) before acting on them.
+
+**1. Map tasks to pages.** List what users ask a coding agent to do with your product: install, authenticate, integrate, migrate, debug, compare, estimate cost, check compatibility. Give each task one canonical page and list the facts that page must state.
+
+| Task | Canonical page | Facts it must state | Gap |
+|---|---|---|---|
+| Install in a Next.js app | /docs/nextjs | Package name, minimum version, env vars, one working example | Example uses a deprecated import |
+| Estimate cost | /pricing | Pricing unit, free tier limits, overage rate | Overage only in a PDF |
+
+**2. Check retrieval.** For each canonical page:
+
+- The title and headings name the task and the stack
+- The answer or command comes before background
+- Prerequisites, versions, and dates are explicit
+- Examples are copyable and current
+- Anchors and URLs stay stable between releases
+- The text renders without JavaScript, and a markdown version exists (see [agent-readiness.md](agent-readiness.md))
+
+Use question-shaped headings only where they match a real task. Don't stuff product names into docs.
+
+**3. Keep a technical fact ledger.** One row per fact an agent might act on: supported versions and runtimes, regions, rate limits, pricing units, auth methods, data handling, deprecations. Record the canonical source and an owner for each. Then check the same fact everywhere it appears: docs, pricing page, README, package registry descriptions (npm, PyPI), examples, and changelog. An agent that finds two different rate limits will guess, or pick a vendor whose docs agree with themselves.
+
+**4. Fill missing decision pages.** Compatibility matrices, migration guides, troubleshooting references, and a plain pricing explainer are the pages agents most often need and vendors most often skip.
+
+**5. Test in fresh sessions.** Run your task panel in both the chat assistant and the coding agent, recording whether you were mentioned, which pages were fetched, and whether the facts came back right. Log errors in the claim ledger from [answer-accuracy.md](answer-accuracy.md).
+
+Don't infer official Anthropic or OpenAI ranking factors from any of this. Check crawler and access controls against current vendor documentation.
+
 ## Limits and rules
 
 - **Some defaults are structural.** A framework's own maker, or the vendor whose examples dominate the framework's docs, may hold that stack no matter what you publish. Railway's reported answer was to win adjacent stacks rather than fight Vercel on Next.js. Pick stacks where the default is still open.
 - **Write instructions for using your product only.** Agent-facing docs, `llms.txt`, and skill files that tell agents to prefer your product over what the user asked for are prompt injection. Agent platforms treat them as manipulation, and users who notice stop trusting the tool. Describe how to do the task with your product; let the task decide.
 - **Agent-provisioned resources still need guardrails.** No-signup provisioning needs abuse limits, expiry for unclaimed resources, and a clear path to claim and pay. Treat that as product work, with growth as the reason to do it.
 - **Placements in agent tool registries change fast.** Recheck plugin and MCP registry listings when you rerun the panel, and treat any share figure, including the ones above, as dated.
+
+---
+
+*Framework lineage: the coding-agent docs audit (task-to-page map, technical fact ledger, Claude vs. Claude Code testing) is adapted (re-expressed and restructured) from Profound's MIT-licensed claude-code-discoverability-auditor skill and its August 2026 study, credited.*

@@ -109,6 +109,8 @@ Value ranking: **brand Search > high-intent non-brand Search > remarketing > PMa
 
 Guardrails when you do run it: account-level **brand exclusions** (or it cannibalizes brand Search and claims the credit); audience signals from first-party data; negative keywords from day one; offline conversions imported *before* scaling it; check the CRM quality of PMax leads by campaign — if they convert to pipeline at half the rate of Search leads, PMax is cheap-looking and expensive-in-reality. Google auto-generates a bad video if you don't supply one.
 
+Check for overlap with Search as a matter of course. In a February 2025 study of 503 accounts it manages, Optmyzr (a PPC tool vendor) found 91% had exact keyword overlap between Search and PMax, touching 56% of 5,768 Search campaigns. That measures how common overlap is; it says nothing about how much spend the overlap costs. To size it for your account, compare the PMax search-terms insights against your Search keywords, and look for brand and high-intent terms that Search would win more cheaply.
+
 ## Benchmarks and the weekly scorecard
 
 B2B SaaS Search ranges (wide on purpose — anchor to your own first 30 days): brand CTR 8–20%, CVR 15–40%; non-brand high-intent CTR 2–6%, CVR 3–10%, CPC $8–40+, CPL $80–400+; competitor terms run higher CPC and lower CVR than non-brand.
