@@ -652,6 +652,15 @@
       "pluginName": "plannotator-effective-html",
       "installedAt": "2026-10-15T03:20:47.446Z",
       "updatedAt": "2026-10-15T03:20:47.446Z"
+    },
+    "seecode": {
+      "source": "aryanutkarsh/seecode",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/aryanutkarsh/seecode.git",
+      "skillPath": "skills/seecode/SKILL.md",
+      "skillFolderHash": "15ce8a2e74196ddd7287614c173bd7d0c73c4fce",
+      "installedAt": "2026-10-21T06:17:50.888Z",
+      "updatedAt": "2026-10-21T06:17:50.888Z"
     }
   },
   "dismissed": {
