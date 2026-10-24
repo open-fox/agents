@@ -1,0 +1,130 @@
+{
+  "generatedAt": "2026-09-14T16:07:03.519Z",
+  "profile": {
+    "skillRoot": "FA",
+    "systemRoot": "OB",
+    "starterRoot": "$r",
+    "contentRoot": "B",
+    "overrides": {
+      "V": "() => \"v3\"",
+      "Ft": "() => \"unsplash\"",
+      "gh": "() => true",
+      "LA": "() => FA.filter(entry => !entry.hidden)",
+      "Ln": "() => false",
+      "HA": "() => []",
+      "Ct": "() => false",
+      "Sn": "() => true",
+      "Vt": "() => true",
+      "_n": "() => true",
+      "hn": "() => true"
+    },
+    "contentOverrides": {
+      "e": "() => true",
+      "t": "() => \"unsplash\""
+    },
+    "resolveImports": [
+      "N",
+      "k",
+      "M",
+      "le",
+      "Pt"
+    ],
+    "resolveContentImports": [
+      "n"
+    ]
+  },
+  "systemPromptOptions": {
+    "claudeMd": "",
+    "designBriefsEnabled": true,
+    "customInstructions": "",
+    "enableOracle": false,
+    "enableSnip": true,
+    "enableTweaksSuggestionBar": true,
+    "enableFigmaMcp": true,
+    "enableDcHelmetClasses": false,
+    "enableQuestionsV3": true,
+    "enableQuestionsHybrid": false,
+    "enableStockPhotos": true,
+    "enableVersionHistory": true,
+    "hasDeferredToolboxTools": true,
+    "isAnthropic": false,
+    "defaultDsProjectId": null,
+    "isDesignSystemProject": false,
+    "dsSource": null,
+    "canAuthorDc": false,
+    "enableDesignComponents": false
+  },
+  "sources": [
+    {
+      "file": "/Users/jimliu/GitHub/claude-design-v2/ref/assets/assets-proxy.anthropic.com/design/v2/assets/v1/desktop-auth-wait-BFZPsTr6.js",
+      "sha256": "4dd2ad4f5edd14b548a590ee194980fb4402e5386aea89f04fb8dc8e5c466bbb"
+    },
+    {
+      "file": "/Users/jimliu/GitHub/claude-design-v2/ref/assets/assets-proxy.anthropic.com/design/v2/assets/v1/ds-self-check--AnlO-GU.js",
+      "sha256": "19a85f86e357bfb6c345bfd56a4efd95db32372cc80d29f204d2f96c933bad07"
+    },
+    {
+      "file": "/Users/jimliu/GitHub/claude-design-v2/ref/assets/assets-proxy.anthropic.com/design/v2/assets/v1/starter-components-content-BtcMVhm3.js",
+      "sha256": "cd3677ce0160d59764c85edbcccaa5ff7b5752120fde4afe4e2bab1f19f05ed4"
+    },
+    {
+      "file": "/Users/jimliu/GitHub/claude-design-v2/ref/assets/assets-proxy.anthropic.com/design/v2/assets/v1/stock-photo-mode-GBt0O2U-.js",
+      "sha256": "4e910d52cb82bace5099c140a7d0f60be0e9cc4d9b78864e00c3113c74b7c27c"
+    },
+    {
+      "file": "/Users/jimliu/GitHub/claude-design-v2/ref/assets/assets-proxy.anthropic.com/design/v2/assets/v1/watercolor-kit-Cm_GzBBA.js",
+      "sha256": "80d9aa6f0a1e7fa295884064620effc58c86493b9337677eb4d167a91522ae67"
+    }
+  ],
+  "promptBundle": "/Users/jimliu/GitHub/claude-design-v2/ref/assets/assets-proxy.anthropic.com/design/v2/assets/v1/desktop-auth-wait-BFZPsTr6.js",
+  "starterBundle": "/Users/jimliu/GitHub/claude-design-v2/ref/assets/assets-proxy.anthropic.com/design/v2/assets/v1/ds-self-check--AnlO-GU.js",
+  "promptBundleBytes": 1685062,
+  "starterBundleBytes": 323471,
+  "skillCount": 40,
+  "starterCount": 28,
+  "slices": {
+    "skills": {
+      "statements": 61,
+      "externalBindings": [
+        "N",
+        "Pt",
+        "Sn",
+        "V",
+        "Vt",
+        "gh",
+        "k"
+      ]
+    },
+    "systemPrompt": {
+      "statements": 127,
+      "externalBindings": [
+        "HA",
+        "LA",
+        "Ln",
+        "M",
+        "N",
+        "Pt",
+        "Sn",
+        "V",
+        "Vt",
+        "_n",
+        "gh",
+        "hn",
+        "k",
+        "le"
+      ]
+    },
+    "starters": {
+      "contentSlice": {
+        "statements": 38,
+        "externalBindings": [
+          "e",
+          "n",
+          "t"
+        ]
+      },
+      "statements": 1,
+      "externalBindings": []
+    }
+  }
+}
